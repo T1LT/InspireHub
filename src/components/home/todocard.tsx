@@ -35,7 +35,7 @@ export default function TodoCard({ todo }: TodoCardProps) {
       <input
         type="checkbox"
         className="w-8 h-8 accent-blue-600 cursor-pointer transition"
-        checked={todo.status === "Completed"}
+        defaultChecked={todo.status === "Completed"}
       />
     </div>
   );
