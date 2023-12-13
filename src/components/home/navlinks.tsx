@@ -16,7 +16,7 @@ export default function NavLinks() {
   const pathname = usePathname();
 
   return (
-    <div className="flex gap-8">
+    <div className="flex gap-4">
       {links.map((link) => {
         const LinkIcon = link.icon;
         return (
