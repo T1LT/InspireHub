@@ -8,7 +8,7 @@ const Navbar = () => {
       <Link href="/home">
         <h1 className="hidden md:block font-bold text-2xl">InspireHub</h1>
       </Link>
-      <div className="flex gap-4">
+      <div className="w-full flex gap-4 justify-between md:justify-end">
         <NavLinks />
         <UserMenu />
       </div>
