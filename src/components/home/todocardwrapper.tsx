@@ -12,7 +12,7 @@ export default async function TodoCardWrapper() {
   const todos = await delayData(todo_data);
 
   return (
-    <div>
+    <div className="overflow-y-scroll p-4 border rounded-md shadow-sm">
       {todos.map((todo: Todo) => (
         <TodoCard todo={todo} key={todo.todo_id} />
       ))}

@@ -3,7 +3,7 @@ import { shimmer } from "./shimmer";
 export function TodoCardSkeleton() {
   return (
     <div
-      className={`${shimmer} relative flex justify-between items-center my-2 px-6 py-4 max-w-screen-sm border rounded-md shadow-sm`}
+      className={`${shimmer} relative flex justify-between items-center my-2 px-6 py-4 border rounded-md shadow-sm`}
     >
       <div className="flex flex-col gap-4">
         <h1 className="h-8 w-96 rounded-md bg-gray-200">{/* TITLE */}</h1>
