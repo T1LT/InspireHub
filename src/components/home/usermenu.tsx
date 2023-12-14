@@ -21,13 +21,19 @@ const UserMenu = () => {
         <DropdownMenuLabel>My Account</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
-          <Link href="/profile">Profile</Link>
+          <Link href="/profile" className="w-full h-full">
+            Profile
+          </Link>
         </DropdownMenuItem>
         <DropdownMenuItem>
-          <Link href="/notifications">Notifications</Link>
+          <Link href="/notifications" className="w-full h-full">
+            Notifications
+          </Link>
         </DropdownMenuItem>
         <DropdownMenuItem>
-          <Link href="/settings">Settings</Link>
+          <Link href="/settings" className="w-full h-full">
+            Settings
+          </Link>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         {/* TODO: ADD LOG OUT FUNCTIONALITY */}
