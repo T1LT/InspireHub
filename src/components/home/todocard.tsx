@@ -15,7 +15,7 @@ export default function TodoCard({ todo }: TodoCardProps) {
   };
 
   return (
-    <div className="flex justify-between items-center my-2 px-6 py-4 border rounded-md shadow-sm cursor-pointer">
+    <div className="flex justify-between items-center my-2 px-6 py-4 border rounded-md shadow-sm hover:bg-gray-50 hover:shadow-lg cursor-pointer transition">
       <div className="flex flex-col gap-4">
         <h1 className="font-semibold text-lg">{todo.title}</h1>
         <div className="flex flex-col gap-2">
