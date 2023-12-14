@@ -4,7 +4,7 @@ export const todo_data = [
     title: "Complete React Project",
     body: "Finish the coding and testing for the React project.",
     due_date: "2023-12-31T23:59:59",
-    status: "In Progress",
+    status: "in_progress",
     priority: "High",
   },
   {
@@ -12,7 +12,7 @@ export const todo_data = [
     title: "Chess Tournament Preparation",
     body: "Practice chess strategies for the upcoming tournament.",
     due_date: "2023-12-15T18:00:00",
-    status: "Open",
+    status: "open",
     priority: "Medium",
   },
   {
@@ -20,7 +20,7 @@ export const todo_data = [
     title: "Gym Workout",
     body: "Hit the gym for a strength training session.",
     due_date: "2023-12-14T08:00:00",
-    status: "Completed",
+    status: "completed",
     priority: "Medium",
   },
   {
@@ -28,7 +28,7 @@ export const todo_data = [
     title: "Anime Marathon",
     body: "Watch the latest episodes of favorite anime series.",
     due_date: "2023-12-20T20:00:00",
-    status: "Open",
+    status: "open",
     priority: "Low",
   },
   {
@@ -36,7 +36,7 @@ export const todo_data = [
     title: "Photography Expedition",
     body: "Capture stunning photos during a photography trip.",
     due_date: "2023-12-25T12:00:00",
-    status: "Open",
+    status: "open",
     priority: "Low",
   },
   {
@@ -44,7 +44,7 @@ export const todo_data = [
     title: "Node.js Project Enhancement",
     body: "Improve features and performance of a Node.js project.",
     due_date: "2023-12-30T16:30:00",
-    status: "In Progress",
+    status: "in_progress",
     priority: "Medium",
   },
   {
@@ -52,7 +52,7 @@ export const todo_data = [
     title: "Game Night with Friends",
     body: "Plan and organize a gaming night with friends.",
     due_date: "2023-12-18T19:00:00",
-    status: "Open",
+    status: "open",
     priority: "Low",
   },
   {
@@ -60,7 +60,7 @@ export const todo_data = [
     title: "Redux State Management Tutorial",
     body: "Create a tutorial on effective Redux state management.",
     due_date: "2023-12-28T14:00:00",
-    status: "Open",
+    status: "open",
     priority: "Medium",
   },
   {
@@ -68,7 +68,7 @@ export const todo_data = [
     title: "Database Optimization for Rails App",
     body: "Optimize database queries for a Ruby on Rails application.",
     due_date: "2023-12-22T10:00:00",
-    status: "In Progress",
+    status: "in_progress",
     priority: "Medium",
   },
   {
@@ -76,7 +76,7 @@ export const todo_data = [
     title: "Study TypeScript Best Practices",
     body: "Read and implement best practices for TypeScript development.",
     due_date: "2023-12-17T15:30:00",
-    status: "Open",
+    status: "open",
     priority: "Low",
   },
 ];

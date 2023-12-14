@@ -22,7 +22,7 @@ export function TodoCardSkeleton() {
 
 export function TodosSkeleton() {
   return (
-    <div className="overflow-y-scroll p-4 border rounded-md shadow-sm">
+    <div className="overflow-y-scroll px-4 py-2 border rounded-md shadow-sm">
       <TodoCardSkeleton />
       <TodoCardSkeleton />
       <TodoCardSkeleton />

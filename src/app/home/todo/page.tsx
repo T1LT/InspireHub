@@ -9,7 +9,7 @@ const TodoPage = () => {
       <div className="flex flex-col w-full">
         <h1 className="font-bold text-2xl">Todos</h1>
         <Suspense fallback={<TodosSkeleton />}>
-          <TodoCardWrapper />
+          <TodoCardWrapper status="open" />
         </Suspense>
       </div>
 
@@ -17,7 +17,7 @@ const TodoPage = () => {
       <div className="flex flex-col w-full">
         <h1 className="font-bold text-2xl">In Progress</h1>
         <Suspense fallback={<TodosSkeleton />}>
-          <TodoCardWrapper />
+          <TodoCardWrapper status="in_progress" />
         </Suspense>
       </div>
 
@@ -25,7 +25,7 @@ const TodoPage = () => {
       <div className="flex flex-col w-full">
         <h1 className="font-bold text-2xl">Done</h1>
         <Suspense fallback={<TodosSkeleton />}>
-          <TodoCardWrapper />
+          <TodoCardWrapper status="completed" />
         </Suspense>
       </div>
     </div>
