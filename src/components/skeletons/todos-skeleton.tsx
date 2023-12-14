@@ -27,8 +27,6 @@ export function TodosSkeleton() {
       <TodoCardSkeleton />
       <TodoCardSkeleton />
       <TodoCardSkeleton />
-      <TodoCardSkeleton />
-      <TodoCardSkeleton />
     </div>
   );
 }
