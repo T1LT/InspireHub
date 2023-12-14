@@ -14,7 +14,7 @@ const UserMenu = () => {
     <DropdownMenu>
       <DropdownMenuTrigger className="outline-none focus:ring-0">
         <div className="p-3 cursor-pointer">
-          <FaCircleUser className="text-2xl hover:text-blue-600 transition" />
+          <FaCircleUser className="text-2xl hover:text-blue-600 motion-safe:transition motion-reduce:transition-none" />
         </div>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">

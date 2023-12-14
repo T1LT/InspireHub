@@ -15,7 +15,7 @@ export default function TodoCard({ todo }: TodoCardProps) {
   };
 
   return (
-    <div className="flex justify-between items-center min-w-[275px] my-2 px-6 py-4 border rounded-md shadow-sm hover:bg-gray-50 hover:shadow-lg cursor-pointer transition">
+    <div className="flex justify-between items-center min-w-[275px] my-2 px-6 py-4 border rounded-md shadow-sm hover:bg-gray-50 hover:shadow-lg cursor-pointer motion-safe:transition motion-reduce:transition-none">
       <div className="flex flex-col gap-4 w-[90%]">
         <h1 className="font-semibold text-lg truncate">{todo.title}</h1>
         <div className="flex flex-col gap-2">
@@ -35,7 +35,7 @@ export default function TodoCard({ todo }: TodoCardProps) {
       <div className="flex justify-center items-center w-[10%]">
         <input
           type="checkbox"
-          className="w-8 h-8 accent-blue-600 cursor-pointer transition"
+          className="w-8 h-8 accent-blue-600 cursor-pointer motion-safe:transition motion-reduce:transition-none"
           defaultChecked={todo.status === "completed"}
         />
       </div>
