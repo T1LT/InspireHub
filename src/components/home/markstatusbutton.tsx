@@ -23,10 +23,7 @@ export default function MarkStatusButton({
 }) {
   const Icon = markAs === "completed" ? FaRegSquare : FaCheckSquare;
   return (
-    <div
-      className="flex flex-col h-full p-2"
-      onClick={(e) => handleClick(e, todo, markAs)}
-    >
+    <div className="p-2" onClick={(e) => handleClick(e, todo, markAs)}>
       <Icon className="text-3xl text-neutral-500 hover:text-blue-600 motion-safe:transition motion-reduce:transition-none" />
     </div>
   );
