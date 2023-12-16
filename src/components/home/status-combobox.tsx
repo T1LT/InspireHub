@@ -15,10 +15,12 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { Todo } from "@/lib/todo_data";
+import { editTodo } from "@/lib/actions";
 
 type Status = {
-  value: string;
-  label: string;
+  value: "open" | "in_progress" | "completed";
+  label: "Todo" | "In Progress" | "Completed";
   icon: LucideIcon;
 };
 
@@ -40,11 +42,23 @@ const statuses: Status[] = [
   },
 ];
 
-export function StatusComboboxPopover({ status }: { status: string }) {
+export function StatusComboboxPopover({ todo }: { todo: Todo }) {
+  const status = todo.completed;
   const [open, setOpen] = React.useState(false);
   const [selectedStatus, setSelectedStatus] = React.useState<Status | null>(
     statuses.find((el) => el.value === status) || null,
   );
+
+  const handleSelect = async (todo: Todo, value: Status["value"]) => {
+    const newTodo = { ...todo, completed: value };
+    await editTodo(todo.todo_id, newTodo);
+
+    setSelectedStatus(
+      statuses.find((priority) => priority.value === value) || null,
+    );
+
+    setOpen(false);
+  };
 
   return (
     <div className="flex items-center space-x-4">
@@ -73,14 +87,7 @@ export function StatusComboboxPopover({ status }: { status: string }) {
                   <CommandItem
                     key={status.value}
                     value={status.value}
-                    onSelect={(value: string) => {
-                      // TODO: MAKE PUT CALL HERE
-                      setSelectedStatus(
-                        statuses.find((priority) => priority.value === value) ||
-                          null,
-                      );
-                      setOpen(false);
-                    }}
+                    onSelect={() => handleSelect(todo, status.value)}
                   >
                     <status.icon
                       className={cn(

@@ -15,6 +15,8 @@ import {
 } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
 import { Circle } from "lucide-react";
+import { Todo } from "@/lib/todo_data";
+import { editTodo } from "@/lib/actions";
 
 type Priority = {
   value: "low" | "medium" | "high";
@@ -36,12 +38,24 @@ const priorities: Priority[] = [
   },
 ];
 
-export function PriorityComboboxPopover({ priority }: { priority: string }) {
+export function PriorityComboboxPopover({ todo }: { todo: Todo }) {
+  const priority = todo.priority;
   const [open, setOpen] = React.useState(false);
   const [selectedPriority, setSelectedPriority] =
     React.useState<Priority | null>(
       priorities.find((el) => el.value === priority) || null,
     );
+
+  const handleSelect = async (todo: Todo, value: Priority["value"]) => {
+    const newTodo = { ...todo, priority: value };
+    await editTodo(todo.todo_id, newTodo);
+
+    setSelectedPriority(
+      priorities.find((priority) => priority.value === value) || null,
+    );
+
+    setOpen(false);
+  };
 
   return (
     <div className="flex items-center space-x-4">
@@ -77,19 +91,12 @@ export function PriorityComboboxPopover({ priority }: { priority: string }) {
                   <CommandItem
                     key={priority.value}
                     value={priority.value}
-                    onSelect={(value: string) => {
-                      // TODO: MAKE PUT CALL HERE
-                      setSelectedPriority(
-                        priorities.find(
-                          (priority) => priority.value === value,
-                        ) || null,
-                      );
-                      setOpen(false);
-                    }}
+                    onSelect={() => handleSelect(todo, priority.value)}
+                    className="group"
                   >
                     <Circle
                       className={cn(
-                        "mr-2 h-4 w-4",
+                        "mr-2 h-4 w-4 group-hover:opacity-100 motion-safe:transition motion-reduce:transition-none",
                         priority.value === selectedPriority?.value
                           ? "opacity-100"
                           : "opacity-40",

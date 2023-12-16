@@ -1,4 +1,4 @@
-import { fetchTodos } from "@/lib/actions";
+import { fetchTodos } from "@/lib/data";
 import TodoCard from "./todocard";
 import { Todo, todo_data } from "@/lib/todo_data";
 

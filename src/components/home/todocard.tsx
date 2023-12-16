@@ -13,7 +13,6 @@ import {
 } from "@/components/ui/dialog";
 import { StatusComboboxPopover } from "./status-combobox";
 import { PriorityComboboxPopover } from "./priority-combobox";
-import PriorityLabel from "./prioritylabel";
 import { AlarmClockCheck } from "lucide-react";
 
 interface TodoCardProps {
@@ -40,7 +39,7 @@ export default function TodoCard({ todo }: TodoCardProps) {
               {todo.title}
             </h1>
             <div className="flex flex-col gap-2">
-              <PriorityLabel
+              <PriorityBadge
                 priority={todo.priority}
                 completed={todo.completed}
               />
@@ -82,13 +81,37 @@ export default function TodoCard({ todo }: TodoCardProps) {
                   </span>
                   {dayjs.unix(todo.due_date).format("MMMM D, YYYY h:mm A")}
                 </p>
-                <PriorityComboboxPopover priority={todo.priority} />
-                <StatusComboboxPopover status={todo.completed} />
+                <PriorityComboboxPopover todo={todo} />
+                <StatusComboboxPopover todo={todo} />
               </div>
             </div>
           </DialogDescription>
         </DialogHeader>
       </DialogContent>
     </Dialog>
+  );
+}
+
+import { capitalize } from "@/lib/utils";
+
+function PriorityBadge({
+  priority,
+  completed,
+}: {
+  priority: "low" | "medium" | "high";
+  completed?: "open" | "in_progress" | "completed";
+}) {
+  return (
+    <p
+      className={clsx(
+        "w-max text-white rounded-md px-2 py-1 text-sm",
+        { "bg-red-500": priority === "high" },
+        { "bg-orange-500": priority === "medium" },
+        { "bg-green-500": priority === "low" },
+        { "line-through": completed === "completed" },
+      )}
+    >
+      {capitalize(priority)}
+    </p>
   );
 }
