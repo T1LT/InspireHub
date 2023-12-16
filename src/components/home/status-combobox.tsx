@@ -88,10 +88,11 @@ export function StatusComboboxPopover({ todo }: { todo: Todo }) {
                     key={status.value}
                     value={status.value}
                     onSelect={() => handleSelect(todo, status.value)}
+                    className="group"
                   >
                     <status.icon
                       className={cn(
-                        "mr-2 h-4 w-4",
+                        "mr-2 h-4 w-4 group-hover:opacity-100 motion-safe:transition motion-reduce:transition-none",
                         status.value === selectedStatus?.value
                           ? "opacity-100"
                           : "opacity-40",
