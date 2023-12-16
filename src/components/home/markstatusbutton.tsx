@@ -7,7 +7,7 @@ import { editTodo } from "@/lib/actions";
 async function handleClick(
   e: React.MouseEvent<HTMLDivElement, MouseEvent>,
   todo: Todo,
-  status: string,
+  status: "open" | "in_progress" | "completed",
 ) {
   e.stopPropagation();
   const newTodo = { ...todo, completed: status };
@@ -19,7 +19,7 @@ export default function MarkStatusButton({
   markAs,
 }: {
   todo: Todo;
-  markAs: string;
+  markAs: "open" | "in_progress" | "completed";
 }) {
   const Icon = markAs === "completed" ? FaRegSquare : FaCheckSquare;
   return (
