@@ -14,7 +14,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
-import { AlertCircle } from "lucide-react";
+import { FaCircle } from "react-icons/fa";
 
 type Priority = {
   value: "low" | "medium" | "high";
@@ -53,7 +53,17 @@ export function PriorityComboboxPopover({ priority }: { priority: string }) {
             className="w-[150px] justify-start"
           >
             {selectedPriority ? (
-              <>{selectedPriority.label}</>
+              <>
+                <FaCircle
+                  className={cn(
+                    "mr-2 h-3 w-3",
+                    selectedPriority.value === "low" && "text-green-600",
+                    selectedPriority.value === "medium" && "text-orange-500",
+                    selectedPriority.value === "high" && "text-red-600",
+                  )}
+                />
+                {selectedPriority.label}
+              </>
             ) : (
               <>+ Set Priority</>
             )}
@@ -77,9 +87,9 @@ export function PriorityComboboxPopover({ priority }: { priority: string }) {
                       setOpen(false);
                     }}
                   >
-                    <AlertCircle
+                    <FaCircle
                       className={cn(
-                        "mr-2 h-4 w-4",
+                        "mr-2 h-3 w-3",
                         priority.value === selectedPriority?.value
                           ? "opacity-100"
                           : "opacity-40",
