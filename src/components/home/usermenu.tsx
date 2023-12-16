@@ -1,4 +1,3 @@
-import { FaCircleUser } from "react-icons/fa6";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -8,13 +7,14 @@ import {
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
 import Link from "next/link";
+import { CircleUserRound } from "lucide-react";
 
 const UserMenu = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className="outline-none focus:ring-0">
         <div className="p-3 cursor-pointer">
-          <FaCircleUser className="text-2xl hover:text-blue-600 motion-safe:transition motion-reduce:transition-none" />
+          <CircleUserRound className="h-6 w-6 hover:text-blue-600 motion-safe:transition motion-reduce:transition-none" />
         </div>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
