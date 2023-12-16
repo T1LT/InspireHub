@@ -4,7 +4,7 @@ import { FaSquare } from "react-icons/fa";
 export function TodoCardSkeleton({ completed }: { completed: boolean }) {
   return (
     <div className="relative flex justify-between items-center min-w-[275px] my-2 px-6 py-4 border rounded-md shadow-sm motion-safe:animate-pulse motion-reduce:animate-none">
-      <div className="flex flex-col gap-4 w-[90%]">
+      <div className="flex flex-col gap-2 w-[90%]">
         <h1 className="w-[16em] sm:w-[18.5em] h-8 rounded-md bg-gray-200">
           {/* TITLE */}
         </h1>
