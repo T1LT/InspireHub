@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { FaSquare } from "react-icons/fa";
+import { Square } from "lucide-react";
 
 export function TodoCardSkeleton({ completed }: { completed: boolean }) {
   return (
@@ -24,7 +24,7 @@ export function TodoCardSkeleton({ completed }: { completed: boolean }) {
       {/* CHECKBOX */}
       <div className="flex justify-center items-center w-[10%]">
         <div className="p-2">
-          <FaSquare className="text-3xl text-gray-200" />
+          <Square className="h-8 w-8 text-gray-200" />
         </div>
       </div>
     </div>
