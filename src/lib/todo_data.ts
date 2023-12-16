@@ -96,7 +96,7 @@ export type Todo = {
   title: string;
   body: string;
   due_date: number;
-  completed: string;
-  priority: string;
+  completed: "open" | "in_progress" | "completed";
+  priority: "low" | "medium" | "high";
   user_id: string;
 };

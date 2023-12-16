@@ -6,5 +6,9 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export function capitalize(string: string) {
-  return string.charAt(0).toUpperCase() + string.slice(1);
+  const words = string.split("_");
+  const parsed = words.map(
+    (word) => word.charAt(0).toUpperCase() + word.slice(1),
+  );
+  return parsed.join(" ");
 }
