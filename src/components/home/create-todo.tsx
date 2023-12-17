@@ -85,7 +85,7 @@ interface CreateFormProps {
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function CreateForm({ status, setOpen }: CreateFormProps) {
+export function CreateForm({ status, setOpen }: CreateFormProps) {
   const [loading, setLoading] = useState(false);
 
   // defining the form

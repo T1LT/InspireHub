@@ -1,4 +1,4 @@
-import { CreateTodoButton } from "@/components/home/create-todo-button";
+import { CreateTodoButton } from "@/components/home/create-todo";
 import TodoCardWrapper from "@/components/home/todocardwrapper";
 import { TodosSkeleton } from "@/components/skeletons/todos-skeleton";
 import { ArrowUpCircle, CheckCircle2, Circle } from "lucide-react";
