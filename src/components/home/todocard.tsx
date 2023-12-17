@@ -2,7 +2,7 @@ import { Todo } from "@/lib/todo_data";
 import clsx from "clsx";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
-import MarkStatusButton from "./markstatusbutton";
+import MarkStatusButton from "./mark-status-button";
 import {
   Dialog,
   DialogContent,
