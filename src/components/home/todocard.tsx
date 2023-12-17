@@ -1,3 +1,5 @@
+"use client";
+
 import { Todo } from "@/lib/todo_data";
 import clsx from "clsx";
 import dayjs from "dayjs";
@@ -12,10 +14,10 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
 import { StatusComboboxPopover } from "./status-combobox";
 import { PriorityComboboxPopover } from "./priority-combobox";
 import { AlarmClockCheck } from "lucide-react";
+import { useState } from "react";
 
 interface TodoCardProps {
   todo: Todo;
@@ -23,13 +25,16 @@ interface TodoCardProps {
 }
 
 export default function TodoCard({ todo }: TodoCardProps) {
+  const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
+
   const parseTime = (time: number) => {
     dayjs.extend(relativeTime);
     return dayjs().to(dayjs.unix(time));
   };
 
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <div className="flex justify-between items-center min-w-[275px] my-2 px-6 py-4 border rounded-md shadow-sm hover:bg-gray-50 hover:shadow-lg cursor-pointer motion-safe:transition motion-reduce:transition-none">
           <div className="flex flex-col gap-2 w-[90%]">
@@ -87,17 +92,19 @@ export default function TodoCard({ todo }: TodoCardProps) {
             </div>
           </DialogDescription>
         </DialogHeader>
-        {/* TODO: move this to a separate component */}
-        {/* TODO: add delete action */}
-        <DialogFooter className="flex flex-row sm:justify-start sm:space-x-2">
-          <Button variant="destructive">Delete Todo</Button>
-        </DialogFooter>
+        <TodoDeleteButton
+          id={todo.todo_id}
+          setOpen={setOpen}
+          loading={loading}
+          setLoading={setLoading}
+        />
       </DialogContent>
     </Dialog>
   );
 }
 
 import { capitalize } from "@/lib/utils";
+import TodoDeleteButton from "./todo-delete-button";
 
 function PriorityBadge({
   priority,
