@@ -69,7 +69,7 @@ export default function TodoCard({ todo }: TodoCardProps) {
         </div>
       </DialogTrigger>
       <DialogContent>
-        <DialogHeader>
+        <DialogHeader className="flex flex-col space-y-1.5 text-left">
           <DialogTitle className="text-2xl">{todo.title}</DialogTitle>
           <DialogDescription asChild>
             <div className="flex flex-col py-2 gap-2">
@@ -89,7 +89,7 @@ export default function TodoCard({ todo }: TodoCardProps) {
         </DialogHeader>
         {/* TODO: move this to a separate component */}
         {/* TODO: add delete action */}
-        <DialogFooter>
+        <DialogFooter className="flex flex-row sm:justify-start sm:space-x-2">
           <Button variant="destructive">Delete Todo</Button>
         </DialogFooter>
       </DialogContent>
