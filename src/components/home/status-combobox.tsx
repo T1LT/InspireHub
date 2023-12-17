@@ -19,7 +19,7 @@ import { Todo } from "@/lib/todo_data";
 import { editTodo } from "@/lib/actions";
 
 type Status = {
-  value: "open" | "in_progress" | "completed";
+  value: Todo["completed"];
   label: "Todo" | "In Progress" | "Completed";
   icon: LucideIcon;
 };

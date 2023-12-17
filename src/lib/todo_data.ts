@@ -94,7 +94,7 @@ export const todo_data = [
 export type Todo = {
   todo_id: string;
   title: string;
-  body: string;
+  body?: string;
   due_date: number;
   completed: "open" | "in_progress" | "completed";
   priority: "low" | "medium" | "high";

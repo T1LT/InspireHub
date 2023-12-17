@@ -7,10 +7,12 @@ import {
   Dialog,
   DialogContent,
   DialogDescription,
+  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
 import { StatusComboboxPopover } from "./status-combobox";
 import { PriorityComboboxPopover } from "./priority-combobox";
 import { AlarmClockCheck } from "lucide-react";
@@ -68,10 +70,8 @@ export default function TodoCard({ todo }: TodoCardProps) {
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>
-            <h1 className="text-2xl">{todo.title}</h1>
-          </DialogTitle>
-          <DialogDescription>
+          <DialogTitle className="text-2xl">{todo.title}</DialogTitle>
+          <DialogDescription asChild>
             <div className="flex flex-col py-2 gap-2">
               <p>{todo.body}</p>
               <div className="flex flex-col gap-2 mt-2">
@@ -87,6 +87,11 @@ export default function TodoCard({ todo }: TodoCardProps) {
             </div>
           </DialogDescription>
         </DialogHeader>
+        {/* TODO: move this to a separate component */}
+        {/* TODO: add delete action */}
+        <DialogFooter>
+          <Button variant="destructive">Delete Todo</Button>
+        </DialogFooter>
       </DialogContent>
     </Dialog>
   );

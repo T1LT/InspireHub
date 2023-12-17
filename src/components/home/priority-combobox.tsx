@@ -19,7 +19,7 @@ import { Todo } from "@/lib/todo_data";
 import { editTodo } from "@/lib/actions";
 
 type Priority = {
-  value: "low" | "medium" | "high";
+  value: Todo["priority"];
   label: "Low" | "Medium" | "High";
 };
 

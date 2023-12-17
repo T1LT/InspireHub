@@ -1,6 +1,7 @@
+import { CreateTodoButton } from "@/components/home/create-todo-button";
 import TodoCardWrapper from "@/components/home/todocardwrapper";
 import { TodosSkeleton } from "@/components/skeletons/todos-skeleton";
-import { ArrowUpCircle, CheckCircle2, Circle, PlusCircle } from "lucide-react";
+import { ArrowUpCircle, CheckCircle2, Circle } from "lucide-react";
 import { Suspense } from "react";
 
 const TodoPage = () => {
@@ -11,9 +12,9 @@ const TodoPage = () => {
         <div className="flex justify-between items-center mb-2">
           <h1 className="flex items-center font-bold text-2xl">
             <Circle className="mr-2 h-5 w-5" />
-            Todos
+            Todo
           </h1>
-          <PlusCircle className="h-5 w-5 hover:text-blue-600 motion-safe:transition motion-reduce:transition-none" />
+          <CreateTodoButton status="open" />
         </div>
         <Suspense fallback={<TodosSkeleton completed={false} />}>
           <TodoCardWrapper status="open" />
@@ -27,7 +28,7 @@ const TodoPage = () => {
             <ArrowUpCircle className="mr-2 h-5 w-5" />
             In Progress
           </h1>
-          <PlusCircle className="h-5 w-5 hover:text-blue-600 motion-safe:transition motion-reduce:transition-none" />
+          <CreateTodoButton status="in_progress" />
         </div>
         <Suspense fallback={<TodosSkeleton completed={false} />}>
           <TodoCardWrapper status="in_progress" />
@@ -41,7 +42,7 @@ const TodoPage = () => {
             <CheckCircle2 className="mr-2 h-5 w-5" />
             Done
           </h1>
-          <PlusCircle className="h-5 w-5 hover:text-blue-600 motion-safe:transition motion-reduce:transition-none" />
+          <CreateTodoButton status="completed" />
         </div>
         <Suspense fallback={<TodosSkeleton completed />}>
           <TodoCardWrapper status="completed" />
