@@ -13,10 +13,10 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { cn } from "@/lib/utils";
 import { Circle } from "lucide-react";
 import { Todo } from "@/lib/todo_data";
 import { editTodo } from "@/lib/actions";
+import IconLabel from "./icon-label";
 
 type Priority = {
   value: Todo["priority"];
@@ -67,17 +67,11 @@ export function PriorityComboboxPopover({ todo }: { todo: Todo }) {
             className="w-[150px] justify-start"
           >
             {selectedPriority ? (
-              <>
-                <Circle
-                  className={cn(
-                    "mr-2 h-4 w-4",
-                    selectedPriority.value === "low" && "text-green-600",
-                    selectedPriority.value === "medium" && "text-orange-500",
-                    selectedPriority.value === "high" && "text-red-600",
-                  )}
-                />
-                {selectedPriority.label}
-              </>
+              <IconLabel
+                icon={Circle}
+                value={selectedPriority.value}
+                label={selectedPriority.label}
+              />
             ) : (
               <>+ Set Priority</>
             )}
@@ -94,18 +88,12 @@ export function PriorityComboboxPopover({ todo }: { todo: Todo }) {
                     onSelect={() => handleSelect(todo, priority.value)}
                     className="group"
                   >
-                    <Circle
-                      className={cn(
-                        "mr-2 h-4 w-4 group-hover:opacity-100 motion-safe:transition motion-reduce:transition-none",
-                        priority.value === selectedPriority?.value
-                          ? "opacity-100"
-                          : "opacity-40",
-                        priority.value === "low" && "text-green-600",
-                        priority.value === "medium" && "text-orange-500",
-                        priority.value === "high" && "text-red-600",
-                      )}
+                    <IconLabel
+                      icon={Circle}
+                      value={priority.value}
+                      check={selectedPriority?.value}
+                      label={priority.label}
                     />
-                    <span>{priority.label}</span>
                   </CommandItem>
                 ))}
               </CommandGroup>

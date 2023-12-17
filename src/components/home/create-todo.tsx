@@ -9,7 +9,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Todo } from "@/lib/todo_data";
-import { Plus } from "lucide-react";
+import { ArrowUpCircle, CheckCircle2, Circle, Plus } from "lucide-react";
 
 export function CreateTodoButton({ status }: { status: Todo["completed"] }) {
   const [open, setOpen] = useState(false);
@@ -61,6 +61,7 @@ import { createTodo } from "@/lib/actions";
 import { CalendarIcon, Loader2 } from "lucide-react";
 import dayjs from "dayjs";
 import localizedFormat from "dayjs/plugin/localizedFormat";
+import IconLabel from "./icon-label";
 
 dayjs.extend(localizedFormat);
 
@@ -170,9 +171,15 @@ export function CreateForm({ status, setOpen }: CreateFormProps) {
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
-                  <SelectItem value="low">Low</SelectItem>
-                  <SelectItem value="medium">Medium</SelectItem>
-                  <SelectItem value="high">High</SelectItem>
+                  <SelectItem value="low">
+                    <IconLabel icon={Circle} value="low" label="Low" />
+                  </SelectItem>
+                  <SelectItem value="medium">
+                    <IconLabel icon={Circle} value="medium" label="Medium" />
+                  </SelectItem>
+                  <SelectItem value="high">
+                    <IconLabel icon={Circle} value="high" label="High" />
+                  </SelectItem>
                 </SelectContent>
               </Select>
               <FormDescription className="text-xs">
@@ -183,7 +190,7 @@ export function CreateForm({ status, setOpen }: CreateFormProps) {
           )}
         />
 
-        {/* priority select */}
+        {/* status select */}
         <FormField
           control={form.control}
           name="completed"
@@ -197,9 +204,23 @@ export function CreateForm({ status, setOpen }: CreateFormProps) {
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
-                  <SelectItem value="open">Todo</SelectItem>
-                  <SelectItem value="in_progress">In Progress</SelectItem>
-                  <SelectItem value="completed">Completed</SelectItem>
+                  <SelectItem value="open">
+                    <IconLabel icon={Circle} value="open" label="Todo" />
+                  </SelectItem>
+                  <SelectItem value="in_progress">
+                    <IconLabel
+                      icon={ArrowUpCircle}
+                      value="in_progress"
+                      label="In Progress"
+                    />
+                  </SelectItem>
+                  <SelectItem value="completed">
+                    <IconLabel
+                      icon={CheckCircle2}
+                      value="completed"
+                      label="Completed"
+                    />
+                  </SelectItem>
                 </SelectContent>
               </Select>
               <FormDescription className="text-xs">

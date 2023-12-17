@@ -40,7 +40,7 @@ const TodoPage = () => {
         <div className="flex justify-between items-center mb-2">
           <h1 className="flex items-center font-bold text-2xl">
             <CheckCircle2 className="mr-2 h-5 w-5" />
-            Done
+            Completed
           </h1>
           <CreateTodoButton status="completed" />
         </div>

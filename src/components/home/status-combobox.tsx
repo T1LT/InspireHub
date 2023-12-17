@@ -17,6 +17,7 @@ import {
 } from "@/components/ui/popover";
 import { Todo } from "@/lib/todo_data";
 import { editTodo } from "@/lib/actions";
+import IconLabel from "./icon-label";
 
 type Status = {
   value: Todo["completed"];
@@ -70,10 +71,11 @@ export function StatusComboboxPopover({ todo }: { todo: Todo }) {
             className="w-[150px] justify-start"
           >
             {selectedStatus ? (
-              <>
-                <selectedStatus.icon className="mr-2 h-4 w-4 shrink-0" />
-                {selectedStatus.label}
-              </>
+              <IconLabel
+                icon={selectedStatus.icon}
+                value={selectedStatus.value}
+                label={selectedStatus.label}
+              />
             ) : (
               <>+ Set status</>
             )}
@@ -90,15 +92,12 @@ export function StatusComboboxPopover({ todo }: { todo: Todo }) {
                     onSelect={() => handleSelect(todo, status.value)}
                     className="group"
                   >
-                    <status.icon
-                      className={cn(
-                        "mr-2 h-4 w-4 group-hover:opacity-100 motion-safe:transition motion-reduce:transition-none",
-                        status.value === selectedStatus?.value
-                          ? "opacity-100"
-                          : "opacity-40",
-                      )}
+                    <IconLabel
+                      icon={status.icon}
+                      value={status.value}
+                      check={selectedStatus?.value}
+                      label={status.label}
                     />
-                    <span>{status.label}</span>
                   </CommandItem>
                 ))}
               </CommandGroup>
