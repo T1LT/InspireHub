@@ -30,7 +30,7 @@ export default function MarkStatusButton({
   const Icon = markAs === "completed" ? Square : CheckSquare2;
   return (
     <TooltipProvider>
-      <Tooltip delayDuration={200}>
+      <Tooltip delayDuration={250}>
         <TooltipTrigger asChild>
           <div className="p-2" onClick={(e) => handleClick(e, todo, markAs)}>
             <Icon className="h-8 w-8 text-neutral-500 hover:text-blue-600 motion-safe:transition motion-reduce:transition-none" />
