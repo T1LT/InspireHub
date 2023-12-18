@@ -8,12 +8,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
 import { ArrowUpCircle, CheckCircle2, Circle, Plus } from "lucide-react";
 import { Todo } from "@/lib/todo_data";
 
@@ -23,16 +17,7 @@ export function CreateTodoButton({ status }: { status: Todo["completed"] }) {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <TooltipProvider>
-          <Tooltip delayDuration={250}>
-            <TooltipTrigger asChild>
-              <Plus className="h-5 w-5 cursor-pointer hover:text-blue-600 motion-safe:transition motion-reduce:transition-none" />
-            </TooltipTrigger>
-            <TooltipContent>
-              <p>Create Todo</p>
-            </TooltipContent>
-          </Tooltip>
-        </TooltipProvider>
+        <Plus className="h-5 w-5 cursor-pointer hover:text-blue-600 motion-safe:transition motion-reduce:transition-none" />
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
