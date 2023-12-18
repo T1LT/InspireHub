@@ -110,7 +110,7 @@ export default function TodoCard({ todo }: TodoCardProps) {
             <EditableTitle todo={todo} />
           </DialogTitle>
           <DialogDescription asChild>
-            <div className="flex flex-col py-2 gap-2">
+            <div className="flex flex-col py-2">
               <EditableBody todo={todo} />
               <div className="flex flex-col gap-2 mt-2">
                 <p className="text-sm font-semibold text-secondary-foreground">
@@ -260,6 +260,7 @@ function EditableBody({ todo }: { todo: Todo }) {
     const temp = e.target.value;
     e.target.value = "";
     e.target.value = temp;
+    e.currentTarget.scrollTop = e.currentTarget.scrollHeight;
   }
 
   return (
@@ -294,10 +295,14 @@ function EditableBody({ todo }: { todo: Todo }) {
         </Form>
       ) : (
         <div
-          className="h-20 px-2 py-1 rounded-md border hover:bg-neutral-100 transition"
+          className="h-20 p-2 rounded-md overflow-y-scroll border hover:bg-neutral-100 transition"
           onClick={() => setIsEditing(true)}
         >
-          <p>{todo.body}</p>
+          <p>
+            {todo.body || (
+              <span className="text-neutral-300">Add a description...</span>
+            )}
+          </p>
         </div>
       )}
     </div>
