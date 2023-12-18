@@ -63,7 +63,7 @@ export default function TodoCard({ todo }: TodoCardProps) {
           <div className="flex flex-col gap-2 w-[90%]">
             <h1
               className={clsx("font-semibold text-xl truncate", {
-                "line-through": todo.completed === "completed",
+                "line-through decoration-1": todo.completed === "completed",
               })}
             >
               {todo.title}
@@ -75,7 +75,7 @@ export default function TodoCard({ todo }: TodoCardProps) {
               />
               <p
                 className={clsx("flex items-center", {
-                  "line-through hidden": todo.completed === "completed",
+                  hidden: todo.completed === "completed",
                 })}
               >
                 <AlarmClockCheck className="mr-2 h-5 w-5" />
@@ -96,12 +96,14 @@ export default function TodoCard({ todo }: TodoCardProps) {
           </div>
         </div>
       </DialogTrigger>
-      <DialogContent>
+      <DialogContent className="focus:outline-none">
         <DialogHeader className="flex flex-col space-y-1.5 text-left">
-          <DialogTitle className="text-2xl">{todo.title}</DialogTitle>
+          <DialogTitle asChild>
+            <EditableTitle todo={todo} />
+          </DialogTitle>
           <DialogDescription asChild>
             <div className="flex flex-col py-2 gap-2">
-              <p>{todo.body}</p>
+              <EditableBody todo={todo} />
               <div className="flex flex-col gap-2 mt-2">
                 <p className="text-sm font-semibold text-secondary-foreground">
                   Due
@@ -142,6 +144,158 @@ export default function TodoCard({ todo }: TodoCardProps) {
         />
       </DialogContent>
     </Dialog>
+  );
+}
+
+import { Input } from "@/components/ui/input";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { Textarea } from "@/components/ui/textarea";
+
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+import ClickAwayListener from "@/lib/ClickAwayListener";
+
+const TodoTitleSchema = z.object({
+  title: z.string().min(2, {
+    message: "Title must be at least 2 characters.",
+  }),
+});
+
+function EditableTitle({ todo }: { todo: Todo }) {
+  const [isEditing, setIsEditing] = useState(false);
+
+  const form = useForm<z.infer<typeof TodoTitleSchema>>({
+    resolver: zodResolver(TodoTitleSchema),
+    defaultValues: { title: todo.title },
+  });
+
+  async function onSubmit(values: z.infer<typeof TodoTitleSchema>) {
+    if (values.title !== todo.title) {
+      await editTodo(todo.todo_id, { ...todo, title: values.title });
+    }
+    setIsEditing(false);
+  }
+
+  return (
+    <div className="mt-2 mr-4">
+      {isEditing ? (
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="w-full -ml-2">
+            <FormField
+              control={form.control}
+              name="title"
+              render={({ field }) => (
+                <FormItem>
+                  <FormControl>
+                    <ClickAwayListener
+                      onClickAway={form.handleSubmit(onSubmit)}
+                    >
+                      <Input
+                        placeholder="Title"
+                        {...field}
+                        autoFocus
+                        className="w-full px-2 py-5 text-2xl font-semibold"
+                      />
+                    </ClickAwayListener>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </form>
+        </Form>
+      ) : (
+        <div
+          className="-ml-2 px-2 py-1 rounded-md hover:bg-neutral-100 transition"
+          onClick={() => setIsEditing(true)}
+        >
+          <h1 className="text-2xl font-semibold">{todo.title}</h1>
+        </div>
+      )}
+    </div>
+  );
+}
+
+const TodoBodySchema = z.object({
+  body: z.string().optional(),
+});
+
+function EditableBody({ todo }: { todo: Todo }) {
+  const [isEditing, setIsEditing] = useState(false);
+
+  const form = useForm<z.infer<typeof TodoBodySchema>>({
+    resolver: zodResolver(TodoBodySchema),
+    defaultValues: { body: todo.body },
+  });
+
+  async function onSubmit(values: z.infer<typeof TodoBodySchema>) {
+    if (values.body !== todo.body) {
+      await editTodo(todo.todo_id, { ...todo, body: values.body });
+    }
+    setIsEditing(false);
+  }
+
+  function handleEnter(e: React.KeyboardEvent<HTMLTextAreaElement>) {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      form.handleSubmit(onSubmit)();
+    }
+  }
+
+  function handleMoveCursor(e: React.FocusEvent<HTMLTextAreaElement, Element>) {
+    const temp = e.target.value;
+    e.target.value = "";
+    e.target.value = temp;
+  }
+
+  return (
+    <div className="mr-4">
+      {isEditing ? (
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="w-full -ml-2">
+            <FormField
+              control={form.control}
+              name="body"
+              render={({ field }) => (
+                <FormItem>
+                  <FormControl>
+                    <ClickAwayListener
+                      onClickAway={form.handleSubmit(onSubmit)}
+                    >
+                      <Textarea
+                        placeholder="Body"
+                        {...field}
+                        autoFocus
+                        onKeyDown={handleEnter}
+                        onFocus={handleMoveCursor}
+                        className="w-full px-2 resize-none"
+                      />
+                    </ClickAwayListener>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </form>
+        </Form>
+      ) : (
+        <div
+          className="-ml-2 px-2 py-1 rounded-md hover:bg-neutral-100 transition"
+          onClick={() => setIsEditing(true)}
+        >
+          <p>{todo.body}</p>
+        </div>
+      )}
+    </div>
   );
 }
 

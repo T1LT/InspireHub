@@ -8,6 +8,7 @@ export async function createTodo(todoData: Omit<Todo, "todo_id">) {
   try {
     await fetch("https://657b6c9d394ca9e4af145532.mockapi.io/api/todos", {
       method: "POST",
+      headers: { "content-type": "application/json" },
       body: JSON.stringify(todoData),
     });
   } catch (error) {
@@ -23,6 +24,7 @@ export async function editTodo(id: string, newTodo: Todo) {
   try {
     await fetch(`https://657b6c9d394ca9e4af145532.mockapi.io/api/todos/${id}`, {
       method: "PUT",
+      headers: { "content-type": "application/json" },
       body: JSON.stringify(newTodo),
     });
   } catch (error) {
