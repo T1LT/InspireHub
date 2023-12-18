@@ -157,6 +157,7 @@ import { Input } from "@/components/ui/input";
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormMessage,
@@ -217,7 +218,7 @@ function EditableTitle({ todo }: { todo: Todo }) {
                         <div className="flex">
                           <Button
                             onClick={form.handleSubmit(onSubmit)}
-                            className="p-0 w-10 absolute right-11 top-12 shadow-xl hover:opacity-100 hover:bg-neutral-700"
+                            className="p-0 w-10 absolute right-[2.65rem] top-12 shadow-xl hover:opacity-100 hover:bg-neutral-700"
                           >
                             <Check className="h-5 w-5" />
                           </Button>
@@ -239,7 +240,7 @@ function EditableTitle({ todo }: { todo: Todo }) {
         </Form>
       ) : (
         <div
-          className="px-2 py-1 border border-white rounded-md hover:bg-neutral-100 transition"
+          className="px-2 py-1 border border-white rounded-md hover:bg-neutral-100 hover:border-inherit transition"
           onClick={() => setIsEditing(true)}
         >
           <h1 className="text-2xl font-semibold">{todo.title}</h1>
@@ -310,13 +311,13 @@ function EditableBody({ todo }: { todo: Todo }) {
                         />
                         <div className="flex">
                           <Button
-                            // onClick={form.handleSubmit(onSubmit)}
-                            className="p-0 w-10 absolute right-11 top-[5.45rem] shadow-xl hover:opacity-100 hover:bg-neutral-700"
+                            onClick={form.handleSubmit(onSubmit)}
+                            className="p-0 w-10 absolute right-[2.65rem] top-[5.45rem] shadow-xl hover:opacity-100 hover:bg-neutral-700"
                           >
                             <Check className="h-5 w-5" />
                           </Button>
                           <Button
-                            // onClick={closeEdit}
+                            onClick={closeEdit}
                             className="p-0 w-10 absolute right-0 top-[5.45rem] shadow-xl hover:opacity-100 hover:bg-neutral-700"
                           >
                             <X className="h-5 w-5" />
@@ -332,15 +333,17 @@ function EditableBody({ todo }: { todo: Todo }) {
           </form>
         </Form>
       ) : (
-        <div
-          className="h-20 p-2 rounded-md overflow-y-scroll border hover:bg-neutral-100 transition"
-          onClick={() => setIsEditing(true)}
-        >
-          <p>
-            {todo.body || (
-              <span className="text-neutral-300">Add a description...</span>
-            )}
-          </p>
+        <div className="flex flex-col">
+          <div
+            className="h-20 p-2 rounded-md overflow-y-scroll border hover:bg-neutral-100 transition"
+            onClick={() => setIsEditing(true)}
+          >
+            <p>
+              {todo.body || (
+                <span className="text-neutral-300">Add a description...</span>
+              )}
+            </p>
+          </div>
         </div>
       )}
     </div>
