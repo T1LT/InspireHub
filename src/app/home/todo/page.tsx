@@ -42,7 +42,7 @@ const TodoPage = () => {
             <CheckCircle2 className="mr-2 h-5 w-5" />
             Completed
           </h1>
-          <CreateTodoButton status="completed" />
+          {/* <CreateTodoButton status="completed" /> */}
         </div>
         <Suspense fallback={<TodosSkeleton completed />}>
           <TodoCardWrapper status="completed" />

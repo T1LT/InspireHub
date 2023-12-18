@@ -59,7 +59,15 @@ export default function TodoCard({ todo }: TodoCardProps) {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <div className="flex justify-between items-center min-w-[275px] my-2 px-6 py-4 border rounded-md shadow-sm hover:bg-neutral-50 hover:shadow-xl cursor-pointer motion-safe:transition motion-reduce:transition-none">
+        <div
+          className={clsx(
+            "flex justify-between items-center min-w-[275px] my-2 px-6 py-4 border rounded-md shadow-sm hover:bg-neutral-50 hover:shadow-xl cursor-pointer motion-safe:transition motion-reduce:transition-none",
+            {
+              "bg-neutral-100 hover:bg-neutral-200/60":
+                todo.completed === "completed",
+            },
+          )}
+        >
           <div className="flex flex-col gap-2 w-[90%]">
             <h1
               className={clsx("font-semibold text-xl truncate", {
@@ -123,9 +131,7 @@ export default function TodoCard({ todo }: TodoCardProps) {
                       mode="single"
                       selected={new Date(todo.due_date * 1000)}
                       onSelect={handleChange}
-                      disabled={(date: Date) =>
-                        date < new Date(todo.due_date * 1000)
-                      }
+                      disabled={(date: Date) => date < new Date()}
                       initialFocus
                     />
                   </PopoverContent>
@@ -153,7 +159,6 @@ import {
   FormControl,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
 } from "@/components/ui/form";
 import { Textarea } from "@/components/ui/textarea";
@@ -203,7 +208,7 @@ function EditableTitle({ todo }: { todo: Todo }) {
                         placeholder="Title"
                         {...field}
                         autoFocus
-                        className="w-full px-2 py-5 text-2xl font-semibold"
+                        className="w-full ml-2 px-2 py-5 text-2xl font-semibold"
                       />
                     </ClickAwayListener>
                   </FormControl>
@@ -215,7 +220,7 @@ function EditableTitle({ todo }: { todo: Todo }) {
         </Form>
       ) : (
         <div
-          className="-ml-2 px-2 py-1 rounded-md hover:bg-neutral-100 transition"
+          className="px-2 py-1 rounded-md hover:bg-neutral-100 transition"
           onClick={() => setIsEditing(true)}
         >
           <h1 className="text-2xl font-semibold">{todo.title}</h1>
@@ -261,7 +266,7 @@ function EditableBody({ todo }: { todo: Todo }) {
     <div className="mr-4">
       {isEditing ? (
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="w-full -ml-2">
+          <form onSubmit={form.handleSubmit(onSubmit)} className="w-full">
             <FormField
               control={form.control}
               name="body"
@@ -289,7 +294,7 @@ function EditableBody({ todo }: { todo: Todo }) {
         </Form>
       ) : (
         <div
-          className="-ml-2 px-2 py-1 rounded-md hover:bg-neutral-100 transition"
+          className="h-20 px-2 py-1 rounded-md border hover:bg-neutral-100 transition"
           onClick={() => setIsEditing(true)}
         >
           <p>{todo.body}</p>
@@ -303,7 +308,6 @@ import { capitalize } from "@/lib/utils";
 
 function PriorityBadge({
   priority,
-  completed,
 }: {
   priority: "low" | "medium" | "high";
   completed?: "open" | "in_progress" | "completed";
@@ -315,7 +319,6 @@ function PriorityBadge({
         { "bg-red-500": priority === "high" },
         { "bg-orange-500": priority === "medium" },
         { "bg-green-500": priority === "low" },
-        { "line-through": completed === "completed" },
       )}
     >
       {capitalize(priority)}
