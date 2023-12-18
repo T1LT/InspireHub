@@ -194,7 +194,7 @@ function EditableTitle({ todo }: { todo: Todo }) {
     <div className="mt-2 mr-4">
       {isEditing ? (
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="w-full -ml-2">
+          <form onSubmit={form.handleSubmit(onSubmit)} className="w-full">
             <FormField
               control={form.control}
               name="title"
@@ -208,7 +208,7 @@ function EditableTitle({ todo }: { todo: Todo }) {
                         placeholder="Title"
                         {...field}
                         autoFocus
-                        className="w-full ml-2 px-2 py-5 text-2xl font-semibold"
+                        className="w-full px-2 py-5 text-2xl font-semibold"
                       />
                     </ClickAwayListener>
                   </FormControl>
