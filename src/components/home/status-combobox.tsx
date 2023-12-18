@@ -43,7 +43,7 @@ const statuses: Status[] = [
   },
 ];
 
-export function StatusComboboxPopover({ todo }: { todo: Todo }) {
+export default function StatusComboboxPopover({ todo }: { todo: Todo }) {
   const status = todo.completed;
   const [open, setOpen] = React.useState(false);
   const [selectedStatus, setSelectedStatus] = React.useState<Status | null>(
@@ -62,7 +62,8 @@ export function StatusComboboxPopover({ todo }: { todo: Todo }) {
   };
 
   return (
-    <div className="flex items-center space-x-4">
+    <div className="flex flex-col space-y-2">
+      <p className="text-sm font-semibold text-secondary-foreground">Status</p>
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
           <Button
@@ -105,7 +106,6 @@ export function StatusComboboxPopover({ todo }: { todo: Todo }) {
           </Command>
         </PopoverContent>
       </Popover>
-      <p className="text-sm text-muted-foreground">Status</p>
     </div>
   );
 }

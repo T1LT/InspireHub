@@ -1,23 +1,35 @@
 "use client";
 
-import { Todo } from "@/lib/todo_data";
+import { useState } from "react";
 import clsx from "clsx";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
+
 import MarkStatusButton from "./mark-status-button";
+import TodoDeleteButton from "./todo-delete-button";
+import StatusComboboxPopover from "./status-combobox";
+import PriorityComboboxPopover from "./priority-combobox";
+
+import { Todo } from "@/lib/todo_data";
+import { editTodo } from "@/lib/actions";
+
 import {
   Dialog,
   DialogContent,
   DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { StatusComboboxPopover } from "./status-combobox";
-import { PriorityComboboxPopover } from "./priority-combobox";
-import { AlarmClockCheck } from "lucide-react";
-import { useState } from "react";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { Button } from "@/components/ui/button";
+import { Calendar } from "@/components/ui/calendar";
+
+import { AlarmClockCheck, CalendarIcon } from "lucide-react";
 
 interface TodoCardProps {
   todo: Todo;
@@ -27,11 +39,22 @@ interface TodoCardProps {
 export default function TodoCard({ todo }: TodoCardProps) {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [calendarOpen, setCalendarOpen] = useState(false);
 
   const parseTime = (time: number) => {
     dayjs.extend(relativeTime);
     return dayjs().to(dayjs.unix(time));
   };
+
+  async function handleChange(date: Date | undefined) {
+    if (!date) return;
+
+    const timestamp = Math.floor(new Date(date).getTime() / 1000);
+    const newTodo = { ...todo, due_date: timestamp };
+
+    await editTodo(todo.todo_id, newTodo);
+    setCalendarOpen(false);
+  }
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -80,12 +103,31 @@ export default function TodoCard({ todo }: TodoCardProps) {
             <div className="flex flex-col py-2 gap-2">
               <p>{todo.body}</p>
               <div className="flex flex-col gap-2 mt-2">
-                <p className="mb-2">
-                  <span className="font-semibold mr-1 text-neutral-800">
-                    Due:
-                  </span>
-                  {dayjs.unix(todo.due_date).format("MMMM D, YYYY h:mm A")}
+                <p className="text-sm font-semibold text-secondary-foreground">
+                  Due
                 </p>
+                <Popover open={calendarOpen} onOpenChange={setCalendarOpen}>
+                  <PopoverTrigger asChild>
+                    <Button
+                      variant={"outline"}
+                      className={"w-[240px] pl-3 text-left font-normal"}
+                    >
+                      {dayjs(todo.due_date * 1000).format("LL")}
+                      <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                    </Button>
+                  </PopoverTrigger>
+                  <PopoverContent className="w-auto p-0" align="start">
+                    <Calendar
+                      mode="single"
+                      selected={new Date(todo.due_date * 1000)}
+                      onSelect={handleChange}
+                      disabled={(date: Date) =>
+                        date < new Date(todo.due_date * 1000)
+                      }
+                      initialFocus
+                    />
+                  </PopoverContent>
+                </Popover>
                 <PriorityComboboxPopover todo={todo} />
                 <StatusComboboxPopover todo={todo} />
               </div>
@@ -104,7 +146,6 @@ export default function TodoCard({ todo }: TodoCardProps) {
 }
 
 import { capitalize } from "@/lib/utils";
-import TodoDeleteButton from "./todo-delete-button";
 
 function PriorityBadge({
   priority,

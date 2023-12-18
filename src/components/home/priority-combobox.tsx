@@ -38,7 +38,7 @@ const priorities: Priority[] = [
   },
 ];
 
-export function PriorityComboboxPopover({ todo }: { todo: Todo }) {
+export default function PriorityComboboxPopover({ todo }: { todo: Todo }) {
   const priority = todo.priority;
   const [open, setOpen] = React.useState(false);
   const [selectedPriority, setSelectedPriority] =
@@ -58,7 +58,10 @@ export function PriorityComboboxPopover({ todo }: { todo: Todo }) {
   };
 
   return (
-    <div className="flex items-center space-x-4">
+    <div className="flex flex-col space-y-2">
+      <p className="text-sm font-semibold text-secondary-foreground">
+        Priority
+      </p>
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
           <Button
@@ -101,7 +104,6 @@ export function PriorityComboboxPopover({ todo }: { todo: Todo }) {
           </Command>
         </PopoverContent>
       </Popover>
-      <p className="text-sm text-muted-foreground">Priority</p>
     </div>
   );
 }
