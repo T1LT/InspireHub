@@ -29,7 +29,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 
-import { AlarmClockCheck, CalendarIcon } from "lucide-react";
+import { AlarmClockCheck, CalendarIcon, Check, X } from "lucide-react";
 
 interface TodoCardProps {
   todo: Todo;
@@ -190,6 +190,11 @@ function EditableTitle({ todo }: { todo: Todo }) {
     setIsEditing(false);
   }
 
+  function closeEdit() {
+    form.reset();
+    setIsEditing(false);
+  }
+
   return (
     <div className="mt-2 mr-4">
       {isEditing ? (
@@ -201,15 +206,29 @@ function EditableTitle({ todo }: { todo: Todo }) {
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
-                    <ClickAwayListener
-                      onClickAway={form.handleSubmit(onSubmit)}
-                    >
-                      <Input
-                        placeholder="Title"
-                        {...field}
-                        autoFocus
-                        className="w-full px-2 py-5 text-2xl font-semibold"
-                      />
+                    <ClickAwayListener onClickAway={closeEdit}>
+                      <div className="relative">
+                        <Input
+                          placeholder="Title"
+                          {...field}
+                          autoFocus
+                          className="w-full px-2 py-5 text-2xl font-semibold"
+                        />
+                        <div className="flex">
+                          <Button
+                            onClick={form.handleSubmit(onSubmit)}
+                            className="p-0 w-10 absolute right-11 top-12 shadow-xl hover:opacity-100 hover:bg-neutral-700"
+                          >
+                            <Check className="h-5 w-5" />
+                          </Button>
+                          <Button
+                            onClick={closeEdit}
+                            className="p-0 w-10 absolute right-0 top-12 shadow-xl hover:opacity-100 hover:bg-neutral-700"
+                          >
+                            <X className="h-5 w-5" />
+                          </Button>
+                        </div>
+                      </div>
                     </ClickAwayListener>
                   </FormControl>
                   <FormMessage />
@@ -220,7 +239,7 @@ function EditableTitle({ todo }: { todo: Todo }) {
         </Form>
       ) : (
         <div
-          className="px-2 py-1 rounded-md hover:bg-neutral-100 transition"
+          className="px-2 py-1 border border-white rounded-md hover:bg-neutral-100 transition"
           onClick={() => setIsEditing(true)}
         >
           <h1 className="text-2xl font-semibold">{todo.title}</h1>
@@ -263,6 +282,11 @@ function EditableBody({ todo }: { todo: Todo }) {
     e.currentTarget.scrollTop = e.currentTarget.scrollHeight;
   }
 
+  function closeEdit() {
+    form.reset();
+    setIsEditing(false);
+  }
+
   return (
     <div className="mr-4">
       {isEditing ? (
@@ -274,17 +298,31 @@ function EditableBody({ todo }: { todo: Todo }) {
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
-                    <ClickAwayListener
-                      onClickAway={form.handleSubmit(onSubmit)}
-                    >
-                      <Textarea
-                        placeholder="Body"
-                        {...field}
-                        autoFocus
-                        onKeyDown={handleEnter}
-                        onFocus={handleMoveCursor}
-                        className="w-full px-2 resize-none"
-                      />
+                    <ClickAwayListener onClickAway={closeEdit}>
+                      <div className="relative">
+                        <Textarea
+                          placeholder="Body"
+                          {...field}
+                          autoFocus
+                          onKeyDown={handleEnter}
+                          onFocus={handleMoveCursor}
+                          className="w-full px-2 resize-none"
+                        />
+                        <div className="flex">
+                          <Button
+                            // onClick={form.handleSubmit(onSubmit)}
+                            className="p-0 w-10 absolute right-11 top-[5.45rem] shadow-xl hover:opacity-100 hover:bg-neutral-700"
+                          >
+                            <Check className="h-5 w-5" />
+                          </Button>
+                          <Button
+                            // onClick={closeEdit}
+                            className="p-0 w-10 absolute right-0 top-[5.45rem] shadow-xl hover:opacity-100 hover:bg-neutral-700"
+                          >
+                            <X className="h-5 w-5" />
+                          </Button>
+                        </div>
+                      </div>
                     </ClickAwayListener>
                   </FormControl>
                   <FormMessage />

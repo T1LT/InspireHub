@@ -4,8 +4,8 @@ import { LucideIcon } from "lucide-react";
 interface IconLabelProps {
   icon: LucideIcon;
   check?: string;
-  value: string;
-  label: string;
+  value?: string;
+  label: string | number;
 }
 
 export default function IconLabel({
