@@ -148,7 +148,7 @@ export function CreateForm({ status, setOpen }: CreateFormProps) {
                   {`${field.value.length}/160`}
                 </span>
               </FormDescription>
-              <FormMessage />
+              <FormMessage className="text-xs" />
             </FormItem>
           )}
         />
@@ -166,7 +166,7 @@ export function CreateForm({ status, setOpen }: CreateFormProps) {
               <FormDescription className="text-xs">
                 Add an optional description to your Todo.
               </FormDescription>
-              <FormMessage />
+              <FormMessage className="text-xs" />
             </FormItem>
           )}
         />
@@ -199,7 +199,7 @@ export function CreateForm({ status, setOpen }: CreateFormProps) {
               <FormDescription className="text-xs">
                 Select a priority for your Todo.
               </FormDescription>
-              <FormMessage />
+              <FormMessage className="text-xs" />
             </FormItem>
           )}
         />
@@ -240,7 +240,7 @@ export function CreateForm({ status, setOpen }: CreateFormProps) {
               <FormDescription className="text-xs">
                 Select a status for your todo.
               </FormDescription>
-              <FormMessage />
+              <FormMessage className="text-xs" />
             </FormItem>
           )}
         />
@@ -284,7 +284,7 @@ export function CreateForm({ status, setOpen }: CreateFormProps) {
               <FormDescription className="text-xs">
                 Set a due date for your Todo.
               </FormDescription>
-              <FormMessage />
+              <FormMessage className="text-xs" />
             </FormItem>
           )}
         />

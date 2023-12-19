@@ -244,7 +244,7 @@ function EditableTitle({ todo }: { todo: Todo }) {
                       </div>
                     </ClickAwayListener>
                   </FormControl>
-                  <FormMessage />
+                  <FormMessage className="text-xs" />
                 </FormItem>
               )}
             />
