@@ -170,9 +170,14 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import ClickAwayListener from "@/lib/ClickAwayListener";
 
 const TodoTitleSchema = z.object({
-  title: z.string().min(2, {
-    message: "Title must be at least 2 characters.",
-  }),
+  title: z
+    .string()
+    .min(2, {
+      message: "Title must be at least 2 characters.",
+    })
+    .max(160, {
+      message: "Title must be less than 160 characters.",
+    }),
 });
 
 function EditableTitle({ todo }: { todo: Todo }) {

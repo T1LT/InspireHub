@@ -62,13 +62,19 @@ import { CalendarIcon, Loader2 } from "lucide-react";
 import dayjs from "dayjs";
 import localizedFormat from "dayjs/plugin/localizedFormat";
 import IconLabel from "../icon-label";
+import clsx from "clsx";
 
 dayjs.extend(localizedFormat);
 
 export const TodoSchema = z.object({
-  title: z.string().min(2, {
-    message: "Title must be at least 2 characters.",
-  }),
+  title: z
+    .string()
+    .min(2, {
+      message: "Title must be at least 2 characters.",
+    })
+    .max(160, {
+      message: "Title must be less than 160 characters.",
+    }),
   body: z.string().optional(),
   due_date: z.coerce
     .date()
@@ -131,8 +137,16 @@ export function CreateForm({ status, setOpen }: CreateFormProps) {
               <FormControl>
                 <Input placeholder="Title" {...field} />
               </FormControl>
-              <FormDescription className="text-xs">
-                Give a name to your Todo. 2 characters minimum.
+              <FormDescription className="text-xs flex justify-between">
+                Name your Todo (between 2 and 160 characters).
+                <span
+                  className={clsx("ml-1 font-semibold", {
+                    hidden: field.value.length < 140,
+                    "block text-red-500": field.value.length > 160,
+                  })}
+                >
+                  {`${field.value.length}/160`}
+                </span>
               </FormDescription>
               <FormMessage />
             </FormItem>
