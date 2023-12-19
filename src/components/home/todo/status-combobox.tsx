@@ -17,7 +17,7 @@ import {
 } from "@/components/ui/popover";
 import { Todo } from "@/lib/todo_data";
 import { editTodo } from "@/lib/actions";
-import IconLabel from "./icon-label";
+import IconLabel from "../icon-label";
 
 type Status = {
   value: Todo["completed"];

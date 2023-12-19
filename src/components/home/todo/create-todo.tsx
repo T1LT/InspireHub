@@ -61,7 +61,7 @@ import { createTodo } from "@/lib/actions";
 import { CalendarIcon, Loader2 } from "lucide-react";
 import dayjs from "dayjs";
 import localizedFormat from "dayjs/plugin/localizedFormat";
-import IconLabel from "./icon-label";
+import IconLabel from "../icon-label";
 
 dayjs.extend(localizedFormat);
 
