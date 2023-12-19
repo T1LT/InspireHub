@@ -3,9 +3,9 @@ import { Square } from "lucide-react";
 
 export function TodoCardSkeleton({ completed }: { completed: boolean }) {
   return (
-    <div className="relative flex justify-between items-center min-w-[275px] my-2 px-6 py-4 border rounded-md shadow-sm motion-safe:animate-pulse motion-reduce:animate-none">
+    <div className="relative flex justify-between items-center min-w-[275px] w-[30vw] my-2 px-6 py-4 border rounded-md shadow-sm motion-safe:animate-pulse motion-reduce:animate-none">
       <div className="flex flex-col gap-2 w-[90%]">
-        <h1 className="w-[16em] sm:w-[18.5em] h-8 rounded-md bg-gray-200">
+        <h1 className="w-[12em] lg:w-[15em] xl:w-[18.5em] h-8 rounded-md bg-gray-200">
           {/* TITLE */}
         </h1>
         <div className="flex flex-col gap-2">
@@ -33,7 +33,7 @@ export function TodoCardSkeleton({ completed }: { completed: boolean }) {
 
 export function TodosSkeleton({ completed }: { completed: boolean }) {
   return (
-    <div className="overflow-y-scroll px-4 py-2 border rounded-md shadow-sm">
+    <div className="flex flex-col overflow-y-scroll px-4 py-2 border rounded-md shadow-sm">
       <TodoCardSkeleton completed={completed} />
       <TodoCardSkeleton completed={completed} />
       <TodoCardSkeleton completed={completed} />
