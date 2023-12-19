@@ -61,7 +61,7 @@ export default function TodoCard({ todo }: TodoCardProps) {
       <DialogTrigger asChild>
         <div
           className={clsx(
-            "flex justify-between items-center min-w-[275px] my-2 px-6 py-4 border rounded-md shadow-sm hover:bg-neutral-50 hover:shadow-xl cursor-pointer motion-safe:transition motion-reduce:transition-none",
+            "flex justify-between items-center min-w-[275px] max-w-[575px] my-2 px-6 py-4 border rounded-md shadow-sm hover:bg-neutral-50 hover:shadow-xl cursor-pointer motion-safe:transition motion-reduce:transition-none",
             {
               "bg-neutral-100 hover:bg-neutral-200/60":
                 todo.completed === "completed",
@@ -157,7 +157,6 @@ import { Input } from "@/components/ui/input";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormMessage,
@@ -192,7 +191,7 @@ function EditableTitle({ todo }: { todo: Todo }) {
   }
 
   function closeEdit() {
-    form.reset();
+    form.reset({ title: todo.title });
     setIsEditing(false);
   }
 
@@ -240,7 +239,7 @@ function EditableTitle({ todo }: { todo: Todo }) {
         </Form>
       ) : (
         <div
-          className="px-2 py-1 border border-white rounded-md hover:bg-neutral-100 hover:border-inherit transition"
+          className="px-2 py-1 border border-white rounded-md hover:bg-neutral-100 hover:border-inherit transition max-w-md truncate"
           onClick={() => setIsEditing(true)}
         >
           <h1 className="text-2xl font-semibold">{todo.title}</h1>
@@ -284,7 +283,7 @@ function EditableBody({ todo }: { todo: Todo }) {
   }
 
   function closeEdit() {
-    form.reset();
+    form.reset({ body: todo.body });
     setIsEditing(false);
   }
 
@@ -302,7 +301,7 @@ function EditableBody({ todo }: { todo: Todo }) {
                     <ClickAwayListener onClickAway={closeEdit}>
                       <div className="relative">
                         <Textarea
-                          placeholder="Body"
+                          placeholder="Add a description..."
                           {...field}
                           autoFocus
                           onKeyDown={handleEnter}
@@ -340,7 +339,7 @@ function EditableBody({ todo }: { todo: Todo }) {
           >
             <p>
               {todo.body || (
-                <span className="text-neutral-300">Add a description...</span>
+                <span className="text-neutral-400">Add a description...</span>
               )}
             </p>
           </div>
