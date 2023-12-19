@@ -16,7 +16,7 @@ export default async function TodoCardWrapper({ status }: { status: string }) {
   if (!todos) return <h1>Something went wrong.</h1>;
 
   return (
-    <div className="overflow-y-scroll px-4 py-2 border rounded-md shadow-sm">
+    <div className="flex flex-col items-center overflow-y-scroll px-4 py-2 border rounded-md shadow-sm">
       {todos
         .filter((el: Todo) => el.completed === status)
         .map((todo: Todo) => (

@@ -61,7 +61,7 @@ export default function TodoCard({ todo }: TodoCardProps) {
       <DialogTrigger asChild>
         <div
           className={clsx(
-            "flex justify-between items-center min-w-[275px] max-w-[575px] my-2 px-6 py-4 border rounded-md shadow-sm hover:bg-neutral-50 hover:shadow-xl cursor-pointer motion-safe:transition motion-reduce:transition-none",
+            "flex justify-between items-center min-w-[275px] w-[30vw] my-2 px-6 py-4 border rounded-md shadow-sm hover:bg-neutral-50 hover:shadow-xl cursor-pointer motion-safe:transition motion-reduce:transition-none",
             {
               "bg-neutral-100 hover:bg-neutral-200/60":
                 todo.completed === "completed",
