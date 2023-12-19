@@ -221,12 +221,14 @@ function EditableTitle({ todo }: { todo: Todo }) {
                         />
                         <div className="flex">
                           <Button
+                            type="submit"
                             onClick={form.handleSubmit(onSubmit)}
                             className="p-0 w-10 absolute right-[2.65rem] top-12 shadow-xl hover:opacity-100 hover:bg-neutral-700"
                           >
                             <Check className="h-5 w-5" />
                           </Button>
                           <Button
+                            type="button"
                             onClick={closeEdit}
                             className="p-0 w-10 absolute right-0 top-12 shadow-xl hover:opacity-100 hover:bg-neutral-700"
                           >
@@ -244,7 +246,7 @@ function EditableTitle({ todo }: { todo: Todo }) {
         </Form>
       ) : (
         <div
-          className="px-2 py-1 border border-white rounded-md hover:bg-neutral-100 hover:border-inherit transition max-w-md truncate"
+          className="px-2 py-1 border border-white rounded-md hover:bg-neutral-100 hover:border-inherit transition max-w-md"
           onClick={() => setIsEditing(true)}
         >
           <h1 className="text-2xl font-semibold">{todo.title}</h1>
@@ -315,12 +317,14 @@ function EditableBody({ todo }: { todo: Todo }) {
                         />
                         <div className="flex">
                           <Button
+                            type="submit"
                             onClick={form.handleSubmit(onSubmit)}
                             className="p-0 w-10 absolute right-[2.65rem] top-[5.45rem] shadow-xl hover:opacity-100 hover:bg-neutral-700"
                           >
                             <Check className="h-5 w-5" />
                           </Button>
                           <Button
+                            type="button"
                             onClick={closeEdit}
                             className="p-0 w-10 absolute right-0 top-[5.45rem] shadow-xl hover:opacity-100 hover:bg-neutral-700"
                           >
