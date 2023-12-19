@@ -82,12 +82,18 @@ export default function TodoCard({ todo }: TodoCardProps) {
                 completed={todo.completed}
               />
               <p
-                className={clsx("flex items-center", {
+                className={clsx("flex items-center relative group w-44", {
                   hidden: todo.completed === "completed",
                 })}
               >
                 <AlarmClockCheck className="mr-2 h-5 w-5" />
-                {`Due ${parseTime(todo.due_date)}`}
+                <span>Due</span>
+                <span className="absolute left-16 opacity-100 group-hover:opacity-0 group-hover:-translate-y-3 transition">
+                  {parseTime(todo.due_date)}
+                </span>
+                <span className="absolute left-16 opacity-0 group-hover:opacity-100 transition">
+                  {dayjs(todo.due_date * 1000).format("ll")}
+                </span>
               </p>
             </div>
           </div>
