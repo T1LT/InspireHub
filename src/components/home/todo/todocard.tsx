@@ -187,8 +187,8 @@ const TodoTitleSchema = z.object({
     .min(2, {
       message: "Title must be at least 2 characters.",
     })
-    .max(160, {
-      message: "Title must be less than 160 characters.",
+    .max(40, {
+      message: "Title must be less than 40 characters.",
     }),
 });
 
