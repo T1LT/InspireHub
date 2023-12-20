@@ -3,7 +3,6 @@
 import { useState } from "react";
 import clsx from "clsx";
 import dayjs from "dayjs";
-import relativeTime from "dayjs/plugin/relativeTime";
 
 import MarkStatusButton from "./mark-status-button";
 import TodoDeleteButton from "./todo-delete-button";
@@ -40,11 +39,6 @@ export default function TodoCard({ todo }: TodoCardProps) {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [calendarOpen, setCalendarOpen] = useState(false);
-
-  // const parseTime = (time: number) => {
-  //   dayjs.extend(relativeTime);
-  //   return dayjs().to(dayjs.unix(time));
-  // };
 
   function checkOverdue(date: number) {
     const diff = dayjs(date * 1000).diff(new Date());
