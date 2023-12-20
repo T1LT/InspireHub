@@ -141,11 +141,11 @@ export function CreateForm({ status, setOpen }: CreateFormProps) {
                 Name your Todo (between 2 and 40 characters).
                 <span
                   className={clsx("ml-1 font-semibold", {
-                    hidden: field.value.length < 140,
-                    "block text-red-500": field.value.length > 160,
+                    hidden: field.value.length < 30,
+                    "block text-red-500": field.value.length > 40,
                   })}
                 >
-                  {`${field.value.length}/160`}
+                  {`${field.value.length}/40`}
                 </span>
               </FormDescription>
               <FormMessage className="text-xs" />
