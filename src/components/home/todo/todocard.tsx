@@ -41,10 +41,29 @@ export default function TodoCard({ todo }: TodoCardProps) {
   const [loading, setLoading] = useState(false);
   const [calendarOpen, setCalendarOpen] = useState(false);
 
-  const parseTime = (time: number) => {
-    dayjs.extend(relativeTime);
-    return dayjs().to(dayjs.unix(time));
-  };
+  // const parseTime = (time: number) => {
+  //   dayjs.extend(relativeTime);
+  //   return dayjs().to(dayjs.unix(time));
+  // };
+
+  function checkOverdue(date: number) {
+    const diff = dayjs(date * 1000).diff(new Date());
+    if (diff <= 0) {
+      return (
+        <span className="flex items-center font-semibold text-red-500">
+          <AlarmClockCheck className="mr-2 h-5 w-5" />
+          Overdue
+        </span>
+      );
+    } else {
+      return (
+        <span className="flex items-center">
+          <AlarmClockCheck className="mr-2 h-5 w-5" />
+          {`Due ${dayjs(date * 1000).format("ll")}`}
+        </span>
+      );
+    }
+  }
 
   async function handleChange(date: Date | undefined) {
     if (!date) return;
@@ -82,18 +101,11 @@ export default function TodoCard({ todo }: TodoCardProps) {
                 completed={todo.completed}
               />
               <p
-                className={clsx("flex items-center relative group w-44", {
+                className={clsx("flex items-center w-44", {
                   hidden: todo.completed === "completed",
                 })}
               >
-                <AlarmClockCheck className="mr-2 h-5 w-5" />
-                <span>Due</span>
-                <span className="absolute left-16 opacity-100 group-hover:opacity-0 group-hover:-translate-y-3 transition">
-                  {parseTime(todo.due_date)}
-                </span>
-                <span className="absolute left-16 opacity-0 group-hover:opacity-100 transition">
-                  {dayjs(todo.due_date * 1000).format("ll")}
-                </span>
+                {checkOverdue(todo.due_date)}
               </p>
             </div>
           </div>
