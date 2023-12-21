@@ -1,6 +1,6 @@
 import Link from "next/link";
 import NavLinks from "./navlinks";
-import UserMenu from "./usermenu";
+import UserMenu from "./user-menu";
 
 const Navbar = () => {
   return (
