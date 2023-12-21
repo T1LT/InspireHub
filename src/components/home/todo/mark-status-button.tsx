@@ -37,7 +37,7 @@ export default function MarkStatusButton({
           </div>
         </TooltipTrigger>
         <TooltipContent>
-          <p>
+          <p className="font-semibold">
             {todo.completed === "completed"
               ? "Mark as Todo"
               : "Mark as Completed"}

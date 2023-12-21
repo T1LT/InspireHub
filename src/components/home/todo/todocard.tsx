@@ -25,6 +25,12 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 
@@ -44,10 +50,19 @@ export default function TodoCard({ todo }: TodoCardProps) {
     const diff = dayjs(date * 1000).diff(new Date());
     if (diff <= 0) {
       return (
-        <span className="flex items-center font-semibold text-red-500">
-          <AlarmClockCheck className="mr-2 h-5 w-5" />
-          Overdue
-        </span>
+        <TooltipProvider>
+          <Tooltip delayDuration={250}>
+            <TooltipTrigger asChild>
+              <span className="flex items-center font-semibold text-red-500">
+                <AlarmClockCheck className="mr-2 h-5 w-5" />
+                Overdue
+              </span>
+            </TooltipTrigger>
+            <TooltipContent side="right" sideOffset={10}>
+              <p className="font-semibold">{dayjs(date * 1000).format("ll")}</p>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
       );
     } else {
       return (
