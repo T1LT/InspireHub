@@ -135,7 +135,16 @@ export function CreateForm({ status, setOpen }: CreateFormProps) {
             <FormItem>
               <FormLabel>Title</FormLabel>
               <FormControl>
-                <Input placeholder="Title" {...field} />
+                <Input
+                  placeholder="Title"
+                  {...field}
+                  className={clsx(
+                    field.value.length > 29 &&
+                      field.value.length <= 40 &&
+                      "focus-visible:ring-orange-400",
+                    field.value.length > 40 && "focus-visible:ring-red-500",
+                  )}
+                />
               </FormControl>
               <FormDescription className="text-xs flex justify-between">
                 Name your Todo (between 2 and 40 characters).

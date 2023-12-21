@@ -74,7 +74,7 @@ export default function TodoCard({ todo }: TodoCardProps) {
       <DialogTrigger asChild>
         <div
           className={clsx(
-            "flex justify-between items-center min-w-[275px] w-[30vw] my-2 px-6 py-4 border rounded-md shadow-sm hover:bg-neutral-50 hover:shadow-xl cursor-pointer motion-safe:transition motion-reduce:transition-none",
+            "flex justify-between items-center min-w-[275px] w-[28vw] my-2 px-6 py-4 border rounded-md shadow-sm hover:bg-neutral-50 hover:shadow-xl cursor-pointer motion-safe:transition motion-reduce:transition-none",
             {
               "bg-neutral-100 hover:bg-neutral-200/60":
                 todo.completed === "completed",
@@ -229,7 +229,14 @@ function EditableTitle({ todo }: { todo: Todo }) {
                           placeholder="Title"
                           {...field}
                           autoFocus
-                          className="w-full px-2 py-5 text-2xl font-semibold"
+                          className={clsx(
+                            "w-full px-2 py-5 text-2xl font-semibold",
+                            field.value.length > 29 &&
+                              field.value.length <= 40 &&
+                              "focus-visible:ring-orange-400",
+                            field.value.length > 40 &&
+                              "focus-visible:ring-red-500",
+                          )}
                         />
                         <div className="flex">
                           <Button
