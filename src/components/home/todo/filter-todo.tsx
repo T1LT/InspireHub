@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/popover";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import PriorityBadge from "./priority-label";
+import { Button } from "@/components/ui/button";
 
 interface FilterTodoProps {
   filters: string[] | undefined;
@@ -26,7 +27,15 @@ export default function FilterTodoButton({
       <PopoverContent className="w-80">
         <div className="grid gap-4">
           <div className="space-y-2">
-            <h4 className="font-semibold leading-none">Filters</h4>
+            <div className="w-full flex justify-between items-center">
+              <h4 className="font-semibold leading-none">Filters</h4>
+              <button
+                onClick={() => setFilters([])}
+                className="bg-black text-white mr-2 px-2 py-1 text-xs font-medium border rounded-md hover:bg-neutral-800 hover:text-secondary transition"
+              >
+                Reset
+              </button>
+            </div>
             <ToggleGroup
               type="multiple"
               value={filters}
