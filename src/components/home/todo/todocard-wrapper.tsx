@@ -12,7 +12,13 @@ import { TodosSkeleton } from "@/components/skeletons/todos-skeleton";
 //   return data;
 // };
 
-export default function TodoCardWrapper({ status }: { status: string }) {
+export default function TodoCardWrapper({
+  status,
+  filters,
+}: {
+  status: string;
+  filters: string[] | undefined;
+}) {
   // const todos = todo_data;
   // const todos = await delayData(todo_data);
 
@@ -31,6 +37,11 @@ export default function TodoCardWrapper({ status }: { status: string }) {
     <div className="flex flex-col items-center overflow-y-scroll px-4 py-2 border rounded-md shadow-sm">
       {todos
         .filter((el: Todo) => el.completed === status)
+        .filter((el: Todo) => {
+          if (filters && filters.length) {
+            return filters?.includes(el.priority);
+          } else return true;
+        })
         .map((todo: Todo) => (
           <TodoCard todo={todo} key={todo.todo_id} />
         ))}

@@ -4,16 +4,16 @@ import { ArrowUpCircle, CheckCircle2, Circle, LucideIcon } from "lucide-react";
 import FilterTodoButton from "./filter-todo";
 import { CreateTodoButton } from "./create-todo";
 import { useState } from "react";
+import TodoCardWrapper from "./todocard-wrapper";
 
 interface TodoListProps {
-  children: React.ReactNode;
   title: string;
   status: "open" | "in_progress" | "completed";
 }
 
 let Icon: LucideIcon;
 
-export default function TodoList({ children, title, status }: TodoListProps) {
+export default function TodoList({ title, status }: TodoListProps) {
   if (status === "open") Icon = Circle;
   if (status === "in_progress") Icon = ArrowUpCircle;
   if (status === "completed") Icon = CheckCircle2;
@@ -32,7 +32,7 @@ export default function TodoList({ children, title, status }: TodoListProps) {
           {status !== "completed" && <CreateTodoButton status={status} />}
         </div>
       </div>
-      {children}
+      <TodoCardWrapper status={status} filters={filters} />
     </div>
   );
 }
