@@ -106,10 +106,7 @@ export default function TodoCard({ todo }: TodoCardProps) {
               {todo.title}
             </h1>
             <div className="flex flex-col gap-2">
-              <PriorityBadge
-                priority={todo.priority}
-                completed={todo.completed}
-              />
+              <PriorityBadge priority={todo.priority} />
               <p
                 className={clsx("flex items-center w-44", {
                   hidden: todo.completed === "completed",
