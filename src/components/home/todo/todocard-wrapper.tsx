@@ -1,6 +1,10 @@
+"use client";
+
 import { fetchTodos } from "@/lib/data";
 import TodoCard from "./todocard";
 import { Todo, todo_data } from "@/lib/todo_data";
+import { useEffect, useState } from "react";
+import { TodosSkeleton } from "@/components/skeletons/todos-skeleton";
 
 // for testing data loading
 // const delayData = async (data: Todo[]) => {
@@ -8,12 +12,20 @@ import { Todo, todo_data } from "@/lib/todo_data";
 //   return data;
 // };
 
-export default async function TodoCardWrapper({ status }: { status: string }) {
+export default function TodoCardWrapper({ status }: { status: string }) {
   // const todos = todo_data;
   // const todos = await delayData(todo_data);
-  const todos: Todo[] = await fetchTodos();
 
-  if (!todos) return <h1>Something went wrong.</h1>;
+  const [todos, setTodos] = useState<Todo[] | null>(null);
+
+  useEffect(() => {
+    (async () => {
+      const data = await fetchTodos();
+      setTodos(data);
+    })();
+  }, []);
+
+  if (!todos) return <TodosSkeleton completed={status === "completed"} />;
 
   return (
     <div className="flex flex-col items-center overflow-y-scroll px-4 py-2 border rounded-md shadow-sm">

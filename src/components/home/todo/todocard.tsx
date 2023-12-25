@@ -8,6 +8,7 @@ import MarkStatusButton from "./mark-status-button";
 import TodoDeleteButton from "./todo-delete-button";
 import StatusComboboxPopover from "./status-combobox";
 import PriorityComboboxPopover from "./priority-combobox";
+import PriorityBadge from "./priority-label";
 
 import { Todo } from "@/lib/todo_data";
 import { editTodo } from "@/lib/actions";
@@ -389,27 +390,5 @@ function EditableBody({ todo }: { todo: Todo }) {
         </div>
       )}
     </div>
-  );
-}
-
-import { capitalize } from "@/lib/utils";
-
-function PriorityBadge({
-  priority,
-}: {
-  priority: "low" | "medium" | "high";
-  completed?: "open" | "in_progress" | "completed";
-}) {
-  return (
-    <p
-      className={clsx(
-        "w-max text-white rounded-md px-2 py-1 text-sm",
-        { "bg-red-500": priority === "high" },
-        { "bg-orange-500": priority === "medium" },
-        { "bg-green-500": priority === "low" },
-      )}
-    >
-      {capitalize(priority)}
-    </p>
   );
 }
