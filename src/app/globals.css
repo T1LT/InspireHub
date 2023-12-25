@@ -98,3 +98,7 @@
 ::-webkit-scrollbar-thumb:hover {
   background-color: rgba(153, 153, 153, 1);
 }
+
+body {
+  height: 100vh;
+}
