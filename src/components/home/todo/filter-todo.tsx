@@ -1,5 +1,3 @@
-"use client";
-
 import { Filter } from "lucide-react";
 import {
   Popover,

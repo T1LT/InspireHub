@@ -5,6 +5,7 @@ import FilterTodoButton from "./filter-todo";
 import { CreateTodoButton } from "./create-todo";
 import { useState } from "react";
 import TodoCardWrapper from "./todocard-wrapper";
+import SortTodoButton from "./sort-todo";
 
 interface TodoListProps {
   title: string;
@@ -19,6 +20,8 @@ export default function TodoList({ title, status }: TodoListProps) {
   if (status === "completed") Icon = CheckCircle2;
 
   const [filters, setFilters] = useState<string[] | undefined>();
+  const [sortBy, setSortBy] = useState<string[] | undefined>();
+  const [sortOrders, setSortOrders] = useState<string[]>(["asc", "asc", "asc"]);
 
   return (
     <div className="flex flex-col w-full">
@@ -28,6 +31,12 @@ export default function TodoList({ title, status }: TodoListProps) {
           {title}
         </h1>
         <div className="flex items-center gap-2">
+          <SortTodoButton
+            sortBy={sortBy}
+            setSortBy={setSortBy}
+            sortOrders={sortOrders}
+            setSortOrders={setSortOrders}
+          />
           <FilterTodoButton filters={filters} setFilters={setFilters} />
           {status !== "completed" && <CreateTodoButton status={status} />}
         </div>
