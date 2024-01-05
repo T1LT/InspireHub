@@ -12,17 +12,54 @@ import { TodosSkeleton } from "@/components/skeletons/todos-skeleton";
 //   return data;
 // };
 
+interface TodoCardWrapperProps {
+  status: string;
+  filters: string[] | undefined;
+  sortBy: string[] | undefined;
+  sortOrders: string[];
+}
+
 export default function TodoCardWrapper({
   status,
   filters,
-}: {
-  status: string;
-  filters: string[] | undefined;
-}) {
+  sortBy,
+  sortOrders,
+}: TodoCardWrapperProps) {
   // const todos = todo_data;
   // const todos = await delayData(todo_data);
 
   const [todos, setTodos] = useState<Todo[] | null>(null);
+
+  const sortByState = (a: Todo, b: Todo) => {
+    if (!sortBy) return 0;
+
+    let value = 0;
+    const priorities = { low: 0, medium: 1, high: 2 };
+
+    for (const sortProp of sortBy) {
+      if (sortProp === "due_date") {
+        if (sortOrders[0] === "asc") {
+          value ||= a.due_date - b.due_date;
+        } else {
+          value ||= b.due_date - a.due_date;
+        }
+      } else if (sortProp === "priority") {
+        if (sortOrders[1] === "asc") {
+          value ||= priorities[a.priority] - priorities[b.priority];
+        } else {
+          value ||= priorities[b.priority] - priorities[a.priority];
+        }
+      } else {
+        if (sortOrders[2] === "asc") {
+          value ||= a.title.localeCompare(b.title);
+        } else {
+          value ||= b.title.localeCompare(a.title);
+        }
+      }
+    }
+
+    return value;
+  };
 
   useEffect(() => {
     (async () => {
@@ -42,6 +79,7 @@ export default function TodoCardWrapper({
             return filters?.includes(el.priority);
           } else return true;
         })
+        .sort(sortByState)
         .map((todo: Todo) => (
           <TodoCard todo={todo} key={todo.todo_id} />
         ))}

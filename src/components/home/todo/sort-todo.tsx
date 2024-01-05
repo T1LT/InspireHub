@@ -8,12 +8,13 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import { ArrowUpWideNarrow } from "lucide-react";
+import type { ascOrDesc, sortOrdersTuple } from "@/lib/utils";
 
 interface SortTodoProps {
   sortBy: string[] | undefined;
   setSortBy: React.Dispatch<React.SetStateAction<string[] | undefined>>;
-  sortOrders: string[];
-  setSortOrders: React.Dispatch<React.SetStateAction<string[]>>;
+  sortOrders: sortOrdersTuple;
+  setSortOrders: React.Dispatch<React.SetStateAction<sortOrdersTuple>>;
 }
 
 export default function SortTodoButton({
@@ -23,8 +24,9 @@ export default function SortTodoButton({
   setSortOrders,
 }: SortTodoProps) {
   const handleOrderChange = (value: string, idx: number) => {
-    const newSortOrders = [...sortOrders];
-    newSortOrders[idx] = value;
+    const safeValue: ascOrDesc = value as ascOrDesc;
+    const newSortOrders: sortOrdersTuple = [...sortOrders];
+    newSortOrders[idx] = safeValue;
     setSortOrders(newSortOrders);
   };
 
@@ -68,11 +70,15 @@ export default function SortTodoButton({
                 >
                   <div className="flex items-center gap-2">
                     <RadioGroupItem value="asc" id="date_asc" />
-                    <Label htmlFor="date_asc">Ascending</Label>
+                    <Label htmlFor="date_asc" className="cursor-pointer">
+                      Ascending
+                    </Label>
                   </div>
                   <div className="flex items-center gap-2">
                     <RadioGroupItem value="desc" id="date_desc" />
-                    <Label htmlFor="date_desc">Descending</Label>
+                    <Label htmlFor="date_desc" className="cursor-pointer">
+                      Descending
+                    </Label>
                   </div>
                 </RadioGroup>
                 <Separator className="my-2 col-span-4" />
@@ -88,11 +94,15 @@ export default function SortTodoButton({
                 >
                   <div className="flex items-center gap-2">
                     <RadioGroupItem value="asc" id="priority_asc" />
-                    <Label htmlFor="priority_asc">Ascending</Label>
+                    <Label htmlFor="priority_asc" className="cursor-pointer">
+                      Ascending
+                    </Label>
                   </div>
                   <div className="flex items-center gap-2">
                     <RadioGroupItem value="desc" id="priority_desc" />
-                    <Label htmlFor="priority_desc">Descending</Label>
+                    <Label htmlFor="priority_desc" className="cursor-pointer">
+                      Descending
+                    </Label>
                   </div>
                 </RadioGroup>
                 <Separator className="my-2 col-span-4" />
@@ -108,11 +118,21 @@ export default function SortTodoButton({
                 >
                   <div className="flex items-center gap-2">
                     <RadioGroupItem value="asc" id="alphabetical_asc" />
-                    <Label htmlFor="alphabetical_asc">Ascending</Label>
+                    <Label
+                      htmlFor="alphabetical_asc"
+                      className="cursor-pointer"
+                    >
+                      Ascending
+                    </Label>
                   </div>
                   <div className="flex items-center gap-2">
                     <RadioGroupItem value="desc" id="alphabetical_desc" />
-                    <Label htmlFor="alphabetical_desc">Descending</Label>
+                    <Label
+                      htmlFor="alphabetical_desc"
+                      className="cursor-pointer"
+                    >
+                      Descending
+                    </Label>
                   </div>
                 </RadioGroup>
               </div>

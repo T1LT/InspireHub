@@ -6,6 +6,7 @@ import { CreateTodoButton } from "./create-todo";
 import { useState } from "react";
 import TodoCardWrapper from "./todocard-wrapper";
 import SortTodoButton from "./sort-todo";
+import { sortOrdersTuple } from "@/lib/utils";
 
 interface TodoListProps {
   title: string;
@@ -21,7 +22,11 @@ export default function TodoList({ title, status }: TodoListProps) {
 
   const [filters, setFilters] = useState<string[] | undefined>();
   const [sortBy, setSortBy] = useState<string[] | undefined>();
-  const [sortOrders, setSortOrders] = useState<string[]>(["asc", "asc", "asc"]);
+  const [sortOrders, setSortOrders] = useState<sortOrdersTuple>([
+    "asc",
+    "asc",
+    "asc",
+  ]);
 
   return (
     <div className="flex flex-col w-full">
@@ -41,7 +46,12 @@ export default function TodoList({ title, status }: TodoListProps) {
           {status !== "completed" && <CreateTodoButton status={status} />}
         </div>
       </div>
-      <TodoCardWrapper status={status} filters={filters} />
+      <TodoCardWrapper
+        status={status}
+        filters={filters}
+        sortBy={sortBy}
+        sortOrders={sortOrders}
+      />
     </div>
   );
 }

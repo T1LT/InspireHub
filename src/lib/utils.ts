@@ -12,3 +12,6 @@ export function capitalize(string: string) {
   );
   return parsed.join(" ");
 }
+
+export type ascOrDesc = "asc" | "desc";
+export type sortOrdersTuple = [ascOrDesc, ascOrDesc, ascOrDesc];
