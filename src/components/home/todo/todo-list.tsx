@@ -1,12 +1,10 @@
 "use client";
 
 import { ArrowUpCircle, CheckCircle2, Circle, LucideIcon } from "lucide-react";
-import FilterTodoButton from "./filter-todo";
+import TodoOptionsButton from "./todo-options";
 import { CreateTodoButton } from "./create-todo";
 import { useState } from "react";
 import TodoCardWrapper from "./todocard-wrapper";
-import SortTodoButton from "./sort-todo";
-import { sortOrdersTuple } from "@/lib/utils";
 
 interface TodoListProps {
   title: string;
@@ -21,12 +19,7 @@ export default function TodoList({ title, status }: TodoListProps) {
   if (status === "completed") Icon = CheckCircle2;
 
   const [filters, setFilters] = useState<string[] | undefined>();
-  const [sortBy, setSortBy] = useState<string[] | undefined>();
-  const [sortOrders, setSortOrders] = useState<sortOrdersTuple>([
-    "asc",
-    "asc",
-    "asc",
-  ]);
+  const [sortBy, setSortBy] = useState<string | undefined>();
 
   return (
     <div className="flex flex-col w-full">
@@ -36,22 +29,16 @@ export default function TodoList({ title, status }: TodoListProps) {
           {title}
         </h1>
         <div className="flex items-center gap-2">
-          <SortTodoButton
+          <TodoOptionsButton
+            filters={filters}
+            setFilters={setFilters}
             sortBy={sortBy}
             setSortBy={setSortBy}
-            sortOrders={sortOrders}
-            setSortOrders={setSortOrders}
           />
-          <FilterTodoButton filters={filters} setFilters={setFilters} />
           {status !== "completed" && <CreateTodoButton status={status} />}
         </div>
       </div>
-      <TodoCardWrapper
-        status={status}
-        filters={filters}
-        sortBy={sortBy}
-        sortOrders={sortOrders}
-      />
+      <TodoCardWrapper status={status} filters={filters} sortBy={sortBy} />
     </div>
   );
 }
