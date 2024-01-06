@@ -28,6 +28,24 @@ export default function TodoCardWrapper({
 
   const [todos, setTodos] = useState<Todo[] | null>(null);
 
+  const sortByField = (a: Todo, b: Todo) => {
+    if (!sortBy) return 0;
+
+    const [field, order] = sortBy.split(" ");
+    const priorities = { low: 0, medium: 1, high: 2 };
+
+    if (field === "due_date") {
+      if (order === "asc") return a.due_date - b.due_date;
+      else return b.due_date - a.due_date;
+    } else if (field === "priority") {
+      if (order === "asc")
+        return priorities[a.priority] - priorities[b.priority];
+      else return priorities[b.priority] - priorities[a.priority];
+    } else {
+      return a.title.localeCompare(b.title);
+    }
+  };
+
   useEffect(() => {
     (async () => {
       const data = await fetchTodos();
@@ -46,6 +64,7 @@ export default function TodoCardWrapper({
             return filters?.includes(el.priority);
           } else return true;
         })
+        .sort(sortByField)
         .map((todo: Todo) => (
           <TodoCard todo={todo} key={todo.todo_id} />
         ))}
