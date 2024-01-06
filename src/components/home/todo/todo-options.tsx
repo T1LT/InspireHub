@@ -21,28 +21,23 @@ interface TodoOptionsProps {
 const sortOptions = [
   {
     value: "due_date asc",
-    display: `Due Date ${String.fromCharCode(8593)}`,
-    label: "Due Date (Closest to Now)",
+    label: `Due Date ${String.fromCharCode(8593)}`,
   },
   {
     value: "due_date desc",
-    display: `Due Date ${String.fromCharCode(8595)}`,
-    label: "Due Date (Farthest from Now)",
+    label: `Due Date ${String.fromCharCode(8595)}`,
   },
   {
     value: "priority asc",
-    display: `Priority ${String.fromCharCode(8593)}`,
-    label: "Priority (Low to High)",
+    label: `Priority ${String.fromCharCode(8593)}`,
   },
   {
     value: "priority desc",
-    display: `Priority ${String.fromCharCode(8595)}`,
-    label: "Priority (High to Low)",
+    label: `Priority ${String.fromCharCode(8595)}`,
   },
   {
     value: "alphabetical asc",
-    display: "Alphabetical",
-    label: "Alphabetical (A-Z)",
+    label: "Alphabetical",
   },
 ];
 
@@ -65,7 +60,7 @@ export default function TodoOptionsButton({
         <div className="grid gap-4">
           <div className="space-y-2">
             <div className="w-full flex justify-between items-center">
-              <h4 className="font-semibold leading-none">Filter and Sort</h4>
+              <h4 className="font-semibold leading-none">Filter & Sort</h4>
               <button
                 onClick={() => {
                   setFilters([]);
@@ -118,9 +113,7 @@ export default function TodoOptionsButton({
                   aria-expanded={open}
                   className="w-[200px] justify-between"
                 >
-                  {sortBy
-                    ? `Sort By: ${findOption()?.display}`
-                    : "Sort By: None"}
+                  {sortBy ? `Sort By: ${findOption()?.label}` : "Sort By: None"}
                   <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                 </Button>
               </PopoverTrigger>
