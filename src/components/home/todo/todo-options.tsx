@@ -56,20 +56,13 @@ export default function TodoOptionsButton({
       <PopoverTrigger asChild>
         <SlidersHorizontal className="h-4 w-4 cursor-pointer hover:text-blue-600 motion-safe:transition motion-reduce:transition-none" />
       </PopoverTrigger>
-      <PopoverContent className="w-80">
+      <PopoverContent className="w-80 flex flex-col gap-4">
         <div className="grid gap-4">
           <div className="space-y-2">
             <div className="w-full flex justify-between items-center">
-              <h4 className="font-semibold leading-none">Filter & Sort</h4>
-              <button
-                onClick={() => {
-                  setFilters([]);
-                  setSortBy("");
-                }}
-                className="bg-black text-white px-2 py-1 text-xs font-medium border rounded-md hover:bg-neutral-800 hover:text-secondary transition"
-              >
-                Reset
-              </button>
+              <h4 className="text-lg font-semibold leading-none mb-2">
+                Filter & Sort
+              </h4>
             </div>
             <ToggleGroup
               type="multiple"
@@ -104,14 +97,14 @@ export default function TodoOptionsButton({
               </div>
             </ToggleGroup>
           </div>
-          <div className="w-full">
+          <div className="w-full flex justify-center">
             <Popover open={open} onOpenChange={setOpen}>
               <PopoverTrigger asChild>
                 <Button
                   variant="outline"
                   role="combobox"
                   aria-expanded={open}
-                  className="w-[200px] justify-between"
+                  className="w-full justify-between"
                 >
                   {sortBy ? `Sort By: ${findOption()?.label}` : "Sort By: None"}
                   <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
@@ -148,6 +141,15 @@ export default function TodoOptionsButton({
             </Popover>
           </div>
         </div>
+        <button
+          onClick={() => {
+            setFilters([]);
+            setSortBy("");
+          }}
+          className="w-full bg-red-500 text-white px-2 py-2 text-sm font-medium border-red-500 rounded-md hover:bg-red-400 hover:text-secondary transition"
+        >
+          Reset Filters
+        </button>
       </PopoverContent>
     </Popover>
   );
