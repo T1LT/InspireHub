@@ -148,7 +148,7 @@ export default function TodoOptionsButton({
           }}
           className="w-full bg-red-500 text-white px-2 py-2 text-sm font-medium border-red-500 rounded-md hover:bg-red-400 hover:text-secondary transition"
         >
-          Reset Filters
+          Reset Options
         </button>
       </PopoverContent>
     </Popover>
