@@ -24,7 +24,7 @@ const UserMenu = () => {
         <DropdownMenuLabel>My Account</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
-          <Link href="/profile" className="w-full h-full">
+          <Link href="/user" className="w-full h-full">
             Profile
           </Link>
         </DropdownMenuItem>
