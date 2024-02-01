@@ -6,9 +6,9 @@ import clsx from "clsx";
 import { ListChecks, Image, Quote } from "lucide-react";
 
 const links = [
-  { name: "Todo", href: "/home/todo", icon: ListChecks },
-  { name: "Photos", href: "/home/photos", icon: Image },
-  { name: "Quotes", href: "/home/quotes", icon: Quote },
+  { name: "Todo", href: "/todo", icon: ListChecks },
+  { name: "Photos", href: "/photos", icon: Image },
+  { name: "Quotes", href: "/quotes", icon: Quote },
 ];
 
 export default function NavLinks() {
