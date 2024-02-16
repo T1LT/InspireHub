@@ -50,3 +50,66 @@ export async function loginAction(
   // TODO: change this
   redirect("/user");
 }
+
+export type SignUpActionData = {
+  error?:
+    | {
+        code: "INTERNAL_ERROR";
+        message: string;
+      }
+    | {
+        code: "AUTH_ERROR";
+        message: string;
+      }
+    | {
+        code: "VALIDATION_ERROR";
+        fieldErrors: {
+          [key: string]: string[];
+        };
+      };
+};
+
+export async function signUpAction(
+  _prevState: any,
+  formData: FormData,
+): Promise<SignUpActionData | void> {
+  const input = UserSchema.safeParse({
+    username: formData.get("username"),
+    password: formData.get("password"),
+  });
+
+  if (!input.success) {
+    const { fieldErrors } = input.error.flatten();
+    return {
+      error: {
+        code: "VALIDATION_ERROR",
+        fieldErrors,
+      },
+    };
+  }
+
+  try {
+    // API call to sign up the user
+  } catch (err) {
+    return {
+      error: {
+        code: "INTERNAL_ERROR",
+        message: "Server error. Please try again later.",
+      },
+    };
+  }
+
+  try {
+    // API call to login the user
+  } catch (err) {
+    console.error("signIn error", err);
+    return {
+      error: {
+        code: "INTERNAL_ERROR",
+        message: "Server error. Please try again later.",
+      },
+    };
+  }
+
+  redirect("/user");
+}
