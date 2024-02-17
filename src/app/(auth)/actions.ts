@@ -9,6 +9,7 @@ const UserSchema = z.object({
     .min(3)
     .max(20)
     .transform((v) => v.trim().toLowerCase()),
+  email: z.string().min(3).email("Not a valid email."),
   password: z
     .string()
     .min(8)
@@ -27,8 +28,8 @@ export async function loginAction(
   _prevState: any,
   formData: FormData,
 ): Promise<LoginActionData | void> {
-  const input = UserSchema.safeParse({
-    username: formData.get("username"),
+  const input = UserSchema.pick({ email: true, password: true }).safeParse({
+    email: formData.get("email"),
     password: formData.get("password"),
   });
 
@@ -75,6 +76,7 @@ export async function signUpAction(
 ): Promise<SignUpActionData | void> {
   const input = UserSchema.safeParse({
     username: formData.get("username"),
+    email: formData.get("email"),
     password: formData.get("password"),
   });
 

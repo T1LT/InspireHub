@@ -63,19 +63,19 @@ function LoginFormFields({ error }: LoginActionData) {
   return (
     <div className="space-y-3">
       <div className="space-y-2">
-        <label className="block text-neutral-700 mb-1" htmlFor="username">
-          Username
+        <label className="block text-neutral-700 mb-1" htmlFor="email">
+          Email
         </label>
         <Input
           className="w-full text-base"
           autoFocus
           ref={inputRef}
           autoCapitalize="off"
-          id="username"
+          id="email"
           type="text"
-          name="username"
+          name="email"
           disabled={pending}
-          autoComplete="username"
+          autoComplete="email"
           required
         />
       </div>

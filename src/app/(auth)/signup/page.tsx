@@ -79,10 +79,32 @@ function SignUpFormFields({ error }: SignUpActionData) {
           disabled={pending}
           autoComplete="new-username"
         />
-
         {error && "fieldErrors" in error && error.fieldErrors.username ? (
           <div className="text-red-500 text-sm">
             {error.fieldErrors.username.map((err) => (
+              <p key={err}>{err}</p>
+            ))}
+          </div>
+        ) : null}
+      </div>
+      <div className="space-y-2">
+        <label className="block text-neutral-700 mb-1" htmlFor="email">
+          Email
+        </label>
+        <Input
+          className="w-full text-base"
+          autoFocus
+          autoCapitalize="off"
+          id="email"
+          name="email"
+          type="text"
+          required
+          disabled={pending}
+          autoComplete="email"
+        />
+        {error && "fieldErrors" in error && error.fieldErrors.email ? (
+          <div className="text-red-500 text-sm">
+            {error.fieldErrors.email.map((err) => (
               <p key={err}>{err}</p>
             ))}
           </div>
