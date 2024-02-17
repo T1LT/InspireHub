@@ -93,7 +93,6 @@ function SignUpFormFields({ error }: SignUpActionData) {
         </label>
         <Input
           className="w-full text-base"
-          autoFocus
           autoCapitalize="off"
           id="email"
           name="email"
